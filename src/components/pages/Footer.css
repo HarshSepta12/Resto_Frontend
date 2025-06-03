@@ -1,0 +1,30 @@
+.company-heading {
+  font-family: "Pacifico", sans-serif;
+  color: #fea116;
+  font-weight: 400;
+  font-size: 1.78rem;
+  position: relative;
+}
+.company-heading::after {
+  position: absolute;
+  content: "";
+  width: 45px;
+  height: 2px;
+  top: 59%;
+  left: 113px;
+  margin-top: -1px;
+  background: #fea116;
+}
+.bgFooter{
+    background-color: #0f172b ;
+}
+.li{
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  gap: 10px;
+}
+ .li a{
+  color: aliceblue;
+ }
