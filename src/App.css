@@ -1,0 +1,73 @@
+/* Navbar Fix for Small Devices */
+nav ul {
+  flex-wrap: wrap;
+  padding-left: 0;
+  margin-bottom: 0;
+}
+
+.book-btn {
+  background-color: orange;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+@media screen and (max-width: 768px) {
+  .nav-heading {
+    font-size: 1.5rem;
+  }
+
+  nav {
+    flex-direction: column;
+    align-items: flex-start !important;
+    gap: 10px;
+  }
+
+  nav ul {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .book-btn {
+    width: 100%;
+  }
+
+  .display-3 {
+    font-size: 2rem;
+  }
+
+  .pos {
+    position: static;
+  }
+
+  .hero-img img {
+    aspect-ratio: auto;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .display-3 {
+    font-size: 1.75rem;
+  }
+
+  .p-5 {
+    padding: 1rem !important;
+  }
+
+  .book-btn {
+    font-size: 0.9rem;
+    padding: 8px 16px;
+  }
+}
+.blue-bg{
+     position: sticky !important;
+     top: 0px !important;
+     z-index: 111;
+     background-color: rgb(4, 4, 14);
+}
+ul >li > a{
+     color: white !important;
+}

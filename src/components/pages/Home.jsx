@@ -121,21 +121,7 @@ const Home = () => {
       <div className="container-fluid text-light cont-width">
         <div className="row bgc">
           <div className="col-md-12 pos">
-            <nav className="d-flex justify-content-between align-items-center gap-5 p-2">
-              <h1 className="nav-heading">
-                <IoRestaurant />
-                Restoran
-              </h1>
-              <ul className="d-flex justify-content-end align-items-center gap-4">
-                <li>HOME</li>
-                <li>ABOUT</li>
-                <li>SERVICE</li>
-                <li>MENU</li>
-                <li>PAGES</li>
-                <li>CONTACT</li>
-                <button className="book-btn">BOOK TABLE</button>
-              </ul>
-            </nav>
+          
           </div>
           <div className="row justify-content-around align-items-center  p-5">
             <div className="col-md-5 text-center text-lg-start ">
@@ -324,7 +310,7 @@ const Home = () => {
               <ul className="nav nav-pills d-inline-flex justify-content-center border-bottom mb-5">
                 <li className="nav-item">
                   <button
-                    href=""
+                    
                     className={`d-flex align-items-center text-start mx-3 ms-0 pb-3 btn-tab ${
                       activeTab === 1 ? "active" : ""
                     }`}
@@ -341,7 +327,7 @@ const Home = () => {
                 </li>
                 <li className="nav-item">
                   <button
-                    href=""
+                   
                     className={`d-flex align-items-center text-start mx-3 ms-0 pb-3 btn-tab ${
                       activeTab === 2 ? "active" : ""
                     }`}
@@ -358,7 +344,7 @@ const Home = () => {
                 </li>
                 <li className="nav-item">
                   <button
-                    href=""
+                    
                     className={`d-flex align-items-center text-start mx-3 ms-0 pb-3 btn-tab ${
                       activeTab === 3 ? "active" : ""
                     }`}
@@ -454,13 +440,13 @@ const Home = () => {
                   <input type="datetime-local" className="form-control" />
                 </div>
                 <div className="col-md-6">
-                  <select className="form-select">
-                    <option selected>1</option>
-                    <option value="1">2</option>
-                    <option value="2">3</option>
-                    <option value="3">4</option>
-                    <option value="4">5</option>
-                    <option value="5">6</option>
+                  <select className="form-select" defaultValue="1">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
                   </select>
                 </div>
                 <div className="col-12">
