@@ -21,7 +21,7 @@ const About = () => {
                          <div className="about-img2">
                            <img
                              className="img-fluid rounded w-75"
-                             src="../../../public/img/about-2.jpg"
+                             src="/img/about-2.jpg"
                              alt="about2"
                              style={{
                                marginTop: "4rem",
@@ -33,7 +33,7 @@ const About = () => {
                          <div className="about-img3">
                            <img
                              className="img-fluid rounded w-75 "
-                             src="../../../public/img/about-3.jpg"
+                             src="/img/about-3.jpg"
                              alt="about3"
                            />
                          </div>
@@ -42,7 +42,7 @@ const About = () => {
                          <div className="about-img4">
                            <img
                              className="img-fluid rounded w-100 "
-                             src="../../../public/img/about-4.jpg"
+                             src="/img/about-4.jpg"
                              alt="about4"
                              style={{
                                visibility: "visible",

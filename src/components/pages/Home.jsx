@@ -74,28 +74,28 @@ const Home = () => {
   const testimonials = [
     {
       id: 1,
-      img: "/public/img/testimonial-1.jpg",
+      img: "/img/testimonial-1.jpg",
       text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste aspernatur laudantium",
       name: "Karan Johar",
       profession: "Profession",
     },
     {
       id: 2,
-      img: "/public/img/testimonial-2.jpg",
+      img: "/img/testimonial-2.jpg",
       text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste aspernatur laudantium",
       name: "Karan Johar",
       profession: "Profession",
     },
     {
       id: 3,
-      img: "/public/img/testimonial-3.jpg",
+      img: "/img/testimonial-3.jpg",
       text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste aspernatur laudantium",
       name: "Karan Johar",
       profession: "Profession",
     },
     {
       id: 4,
-      img: "/public/img/testimonial-4.jpg",
+      img: "/img/testimonial-4.jpg",
       text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste aspernatur laudantium",
       name: "Karan Johar",
       profession: "Profession",
@@ -202,7 +202,7 @@ const Home = () => {
                 <div className="about-img1">
                   <img
                     className="img-fluid rounded"
-                    src="../../../public/img/about-1.jpg"
+                    src="/img/about-1.jpg"
                     alt="about1"
                   />
                 </div>
@@ -212,7 +212,7 @@ const Home = () => {
                 <div className="about-img2">
                   <img
                     className="img-fluid rounded w-75 "
-                    src="../../../public/img/about-2.jpg"
+                    src="/img/about-2.jpg"
                     alt="about2"
                     style={{
                       marginTop: "4rem",
@@ -224,7 +224,7 @@ const Home = () => {
                 <div className="about-img3">
                   <img
                     className="img-fluid rounded w-75 "
-                    src="../../../public/img/about-3.jpg"
+                    src="/img/about-3.jpg"
                     alt="about3"
                   />
                 </div>
@@ -233,7 +233,7 @@ const Home = () => {
                 <div className="about-img4">
                   <img
                     className="img-fluid rounded w-100 "
-                    src="../../../public/img/about-4.jpg"
+                    src="/img/about-4.jpg"
                     alt="about4"
                     style={{
                       visibility: "visible",
@@ -380,7 +380,7 @@ const Home = () => {
                         }}
                       >
                         <img
-                          src={`../../../public/img/${item.img}`}
+                          src={`/img/${item.img}`}
                           alt={item.name}
                           className="img-fluid rounded"
                           width={90}
@@ -406,7 +406,7 @@ const Home = () => {
           {/* Image Section */}
           <div className="col-md-6">
             <img
-              src="public/img/TableBook.jpg"
+              src="/img/TableBook.jpg"
               alt="TableBookIMg"
               className="img-fluid w-100 h-100"
               style={{ objectFit: "cover" }}
