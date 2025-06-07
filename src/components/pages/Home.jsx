@@ -141,7 +141,7 @@ const Home = () => {
               <div className="hero-img">
                 <img
                   className="Animated-img"
-                  src="/public/img/hero.png"
+                  src="/img/hero.png"
                   alt=""
                   style={{ width: "100%", aspectRatio: 1 }}
                 />
