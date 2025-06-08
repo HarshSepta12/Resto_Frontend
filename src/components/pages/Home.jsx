@@ -7,7 +7,7 @@ import { RiCustomerService2Fill } from "react-icons/ri";
 import { RiCupFill } from "react-icons/ri";
 import { MdLunchDining } from "react-icons/md";
 import { FaFacebook } from "react-icons/fa";
-import { FaInstagram } from "react-icons/fa6";
+import { FaInstagram } from "react-icons/fa";
 import { BsTwitterX } from "react-icons/bs";
 import { FaQuoteLeft } from "react-icons/fa";
 
@@ -33,8 +33,16 @@ const Home = () => {
         },
         { name: "Manchriyan", price: "$100", img: "BreakFast/Break4.jpg" },
         { name: "Pulav", price: "$200", img: "BreakFast/Break5.jpg" },
-        { name: "Brown Bread With Chees", price: "$180", img: "BreakFast/Break6.jpg" },
-        { name: "Deep Fried Samosa", price: "$130", img: "BreakFast/Break7.jpg" },
+        {
+          name: "Brown Bread With Chees",
+          price: "$180",
+          img: "BreakFast/Break6.jpg",
+        },
+        {
+          name: "Deep Fried Samosa",
+          price: "$130",
+          img: "BreakFast/Break7.jpg",
+        },
         { name: "Mix Breakfast", price: "$160", img: "BreakFast/Break1.jpg" },
       ],
     },
@@ -60,9 +68,17 @@ const Home = () => {
       items: [
         { name: "Shahi Paneer", price: "$250", img: "Diner/Diner-1.jpg" },
         { name: "Matar Paneer", price: "$30", img: "Diner/Diner-2.jpg" },
-        { name: "paneer and Dal Makhana", price: "$220", img: "Diner/Diner-3.jpg" },
+        {
+          name: "paneer and Dal Makhana",
+          price: "$220",
+          img: "Diner/Diner-3.jpg",
+        },
         { name: "Paneer Jayka", price: "$90", img: "Diner/Diner-6.jpg" },
-        { name: "Aaji Special Thali", price: "$200", img: "Diner/Diner-8.webp" },
+        {
+          name: "Aaji Special Thali",
+          price: "$200",
+          img: "Diner/Diner-8.webp",
+        },
         { name: "Kaju Kari", price: "$180", img: "Diner/Diner-7.webp" },
         { name: "Dal Makhani", price: "$130", img: "Diner/Diner-6.jpg" },
         { name: "Shahi Paneer", price: "$160", img: "Diner/Diner-1.jpg" },
@@ -120,9 +136,7 @@ const Home = () => {
     <>
       <div className="container-fluid text-light cont-width">
         <div className="row bgc">
-          <div className="col-md-12 pos">
-          
-          </div>
+          <div className="col-md-12 pos"></div>
           <div className="row justify-content-around align-items-center  p-5">
             <div className="col-md-5 text-center text-lg-start ">
               <h1 className="display-3 text-white fw-bolder">
@@ -245,59 +259,77 @@ const Home = () => {
               </div>
             </div>
           </div>
-           <div className="col-md-6 col-sm-12 marg">
-                     <h5 className="about-heading">about Us</h5>
-                     <h1 className="about-title">
-                       Welcome to <IoRestaurant style={{ color: "#FEA116" }} /> Shree Aaji Restaurant – A Taste of Tradition
-                     </h1>
-                     <p className="text-dark">
-                      Located in Raipuriya (Tehsil Petlawad, District Jhabua, Madhya Pradesh), Shree Aaji Restaurant is a family-friendly dining destination offering a delightful mix of authentic flavors and warm hospitality. We are committed to serving delicious, high-quality food that feels just like home.
-                     </p>
-                     <p className="mt-4 text-dark">
-                       Our diverse menu features a variety of cuisines, including flavorful North Indian, aromatic South Indian, and rich Punjabi dishes. In addition to full meals, we also serve light snacks, street-style treats, and popular Chinese dishes like noodles, Manchurian, and spring rolls – all freshly prepared with quality ingredients and traditional recipes.
-                     </p>
+          <div className="col-md-6 col-sm-12 marg">
+            <h5 className="about-heading">about Us</h5>
+            <h1 className="about-title">
+              Welcome to <IoRestaurant style={{ color: "#FEA116" }} /> Shree
+              Aaji Restaurant – A Taste of Tradition
+            </h1>
+            <p className="text-dark">
+              Located in Raipuriya (Tehsil Petlawad, District Jhabua, Madhya
+              Pradesh), Shree Aaji Restaurant is a family-friendly dining
+              destination offering a delightful mix of authentic flavors and
+              warm hospitality. We are committed to serving delicious,
+              high-quality food that feels just like home.
+            </p>
+            <p className="mt-4 text-dark">
+              Our diverse menu features a variety of cuisines, including
+              flavorful North Indian, aromatic South Indian, and rich Punjabi
+              dishes. In addition to full meals, we also serve light snacks,
+              street-style treats, and popular Chinese dishes like noodles,
+              Manchurian, and spring rolls – all freshly prepared with quality
+              ingredients and traditional recipes.
+            </p>
 
-                     <p className="text-dark">At Shree Aaji Restaurant, cleanliness, taste, and friendly service are at the heart of everything we do. Whether you’re looking for a quick bite, a family meal, or a place to hang out with friends, we offer the perfect setting for every occasion.</p>
-                             <p className="text-dark">Come visit us and experience the rich flavors of India in a cozy and welcoming environment. We look forward to serving you!</p>
-                     <div className="d-flex justify-content-start align-items-center flex-wrap gap-5">
-                       <div className="left-border">
-                         <div className="left-border-child"></div>
-                         <h1
-                           style={{
-                             color: "#FEA116",
-                             fontWeight: "900",
-                             fontSize: "50px",
-                           }}
-                         >
-                           15
-                         </h1>
-                         <p style={{ fontSize: "17px" }}>
-                           Years of <br />
-                           <span style={{ fontWeight: "bold" }}>Experience</span>{" "}
-                         </p>
-                       </div>
-         
-                       <div className="left-border">
-                         <div className="left-border-child"></div>
-                         <h1
-                           style={{
-                             color: "#FEA116",
-                             fontWeight: "900",
-                             fontSize: "50px",
-                           }}
-                         >
-                           50
-                         </h1>
-                         <p style={{ fontSize: "17px" }}>
-                           Popular
-                           <br />
-                           <span style={{ fontWeight: "bold" }}>Master Chefs</span>{" "}
-                         </p>
-                       </div>
-                     </div>
-         
-                     <button className="Read-btn">Read More</button>
-                   </div>
+            <p className="text-dark">
+              At Shree Aaji Restaurant, cleanliness, taste, and friendly service
+              are at the heart of everything we do. Whether you’re looking for a
+              quick bite, a family meal, or a place to hang out with friends, we
+              offer the perfect setting for every occasion.
+            </p>
+            <p className="text-dark">
+              Come visit us and experience the rich flavors of India in a cozy
+              and welcoming environment. We look forward to serving you!
+            </p>
+            <div className="d-flex justify-content-start align-items-center flex-wrap gap-5">
+              <div className="left-border">
+                <div className="left-border-child"></div>
+                <h1
+                  style={{
+                    color: "#FEA116",
+                    fontWeight: "900",
+                    fontSize: "50px",
+                  }}
+                >
+                  15
+                </h1>
+                <p style={{ fontSize: "17px" }}>
+                  Years of <br />
+                  <span style={{ fontWeight: "bold" }}>Experience</span>{" "}
+                </p>
+              </div>
+
+              <div className="left-border">
+                <div className="left-border-child"></div>
+                <h1
+                  style={{
+                    color: "#FEA116",
+                    fontWeight: "900",
+                    fontSize: "50px",
+                  }}
+                >
+                  50
+                </h1>
+                <p style={{ fontSize: "17px" }}>
+                  Popular
+                  <br />
+                  <span style={{ fontWeight: "bold" }}>Master Chefs</span>{" "}
+                </p>
+              </div>
+            </div>
+
+            <button className="Read-btn">Read More</button>
+          </div>
         </div>
 
         <div className="row text-dark p-5">
@@ -308,7 +340,6 @@ const Home = () => {
               <ul className="nav nav-pills d-inline-flex justify-content-center border-bottom mb-5">
                 <li className="nav-item">
                   <button
-                    
                     className={`d-flex align-items-center text-start mx-3 ms-0 pb-3 btn-tab ${
                       activeTab === 1 ? "active" : ""
                     }`}
@@ -325,7 +356,6 @@ const Home = () => {
                 </li>
                 <li className="nav-item">
                   <button
-                   
                     className={`d-flex align-items-center text-start mx-3 ms-0 pb-3 btn-tab ${
                       activeTab === 2 ? "active" : ""
                     }`}
@@ -342,7 +372,6 @@ const Home = () => {
                 </li>
                 <li className="nav-item">
                   <button
-                    
                     className={`d-flex align-items-center text-start mx-3 ms-0 pb-3 btn-tab ${
                       activeTab === 3 ? "active" : ""
                     }`}
@@ -496,21 +525,21 @@ const Home = () => {
                     target="_blank"
                     className="social-icon"
                   >
-                    <FaFacebook />
+                    <FaFacebook size={24} />
                   </a>
                   <a
                     href="https://www.instagram.com"
                     target="_blank"
                     className="social-icon"
                   >
-                    <FaInstagram />
+                    <FaInstagram size={24} />
                   </a>
                   <a
                     href="https://www.twitter.com"
                     target="_blank"
                     className="social-icon"
                   >
-                    <BsTwitterX />
+                    <BsTwitterX size={24} />
                   </a>
                 </div>
               </div>
@@ -536,21 +565,21 @@ const Home = () => {
                     target="_blank"
                     className="social-icon"
                   >
-                    <FaFacebook />
+                    <FaFacebook size={24} />
                   </a>
                   <a
                     href="https://www.instagram.com"
                     target="_blank"
                     className="social-icon"
                   >
-                    <FaInstagram />
+                    <FaInstagram size={24} />
                   </a>
                   <a
                     href="https://www.twitter.com"
                     target="_blank"
                     className="social-icon"
                   >
-                    <BsTwitterX />
+                    <BsTwitterX size={24} />
                   </a>
                 </div>
               </div>
@@ -576,21 +605,21 @@ const Home = () => {
                     target="_blank"
                     className="social-icon"
                   >
-                    <FaFacebook />
+                    <FaFacebook size={24} />
                   </a>
                   <a
                     href="https://www.instagram.com"
                     target="_blank"
                     className="social-icon"
                   >
-                    <FaInstagram />
+                    <FaInstagram size={24} />
                   </a>
                   <a
                     href="https://www.twitter.com"
                     target="_blank"
                     className="social-icon"
                   >
-                    <BsTwitterX />
+                    <BsTwitterX size={24} />
                   </a>
                 </div>
               </div>
@@ -616,21 +645,21 @@ const Home = () => {
                     target="_blank"
                     className="social-icon"
                   >
-                    <FaFacebook />
+                    <FaFacebook size={24} />
                   </a>
                   <a
                     href="https://www.instagram.com"
                     target="_blank"
                     className="social-icon"
                   >
-                    <FaInstagram />
+                    <FaInstagram size={24} />
                   </a>
                   <a
                     href="https://www.twitter.com"
                     target="_blank"
                     className="social-icon"
                   >
-                    <BsTwitterX />
+                    <BsTwitterX size={24} />
                   </a>
                 </div>
               </div>

@@ -1,10 +1,61 @@
-/* Navbar Fix for Small Devices */
-nav ul {
-  flex-wrap: wrap;
+
+ul {
+  list-style: none;
   padding-left: 0;
-  margin-bottom: 0;
+  margin: 0;
+}
+li {
+  margin: 0;
+}
+a {
+  text-decoration: none;
+  color: rgb(255, 255, 255) !important;
+      font-family: "JosefinSans, sansarif";
 }
 
+nav {
+  display: flex !important;            
+  flex-wrap: nowrap !important;       
+  justify-content: space-around !important;
+  align-items: center;
+  padding: 10px 20px;
+}
+.blue-bg {
+  position: sticky;
+  top: 0;
+  z-index: 111;
+  background-color: rgb(4, 4, 14);
+}
+
+/* Top Header Row */
+.header-top {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  width: 100%; 
+}
+
+
+/* Heading */
+.nav-heading {
+  font-size: 2rem;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+   font-family: "JosefinSans, sansarif";
+}
+
+
+.nav-links {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  transition: all 0.3s ease;
+ width: 100%;
+}
+
+/* Button Style */
 .book-btn {
   background-color: orange;
   color: white;
@@ -12,62 +63,58 @@ nav ul {
   border: none;
   border-radius: 5px;
   font-size: 1rem;
+  cursor: pointer;
 }
 
+/* Hamburger Image */
+.hemburge {
+  width: 30px;
+  height: 30px;
+  display: none;
+  cursor: pointer;
+  color: #fff !important;
+}
+.hem-parent{
+  /* color: orange; */
+  background-color: orange;
+}
+
+/* Mobile Styles */
 @media screen and (max-width: 768px) {
   .nav-heading {
     font-size: 1.5rem;
   }
-
   nav {
-    flex-direction: column;
-    align-items: flex-start !important;
-    gap: 10px;
+    flex-wrap: wrap;         /* Chhote screen par wrap kar sakte hain */
+    flex-direction: column;  /* Vertical stacking for small devices */
+    align-items: flex-start; /* Left align */
   }
-
-  nav ul {
+  .nav-links {
+    display: none;
     flex-direction: column;
     align-items: flex-start;
-    gap: 10px;
+    gap: 15px;
+    padding: 10px 0;
+    width: 100%;
+  }
+
+  .nav-links.show {
+    display: flex;
+  }
+
+  .hemburge {
+    display: block;
   }
 
   .book-btn {
     width: 100%;
   }
-
-  .display-3 {
-    font-size: 2rem;
-  }
-
-  .pos {
-    position: static;
-  }
-
-  .hero-img img {
-    aspect-ratio: auto;
-  }
 }
 
+/* Extra Small Devices */
 @media screen and (max-width: 576px) {
-  .display-3 {
-    font-size: 1.75rem;
-  }
-
-  .p-5 {
-    padding: 1rem !important;
-  }
-
   .book-btn {
     font-size: 0.9rem;
     padding: 8px 16px;
   }
-}
-.blue-bg{
-     position: sticky !important;
-     top: 0px !important;
-     z-index: 111;
-     background-color: rgb(4, 4, 14);
-}
-ul >li > a{
-     color: white !important;
 }
