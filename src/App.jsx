@@ -6,8 +6,8 @@ import Contact from "./components/pages/Contact";
 import Footer from "./components/pages/Footer";
 import About from "./components/pages/About";
 import Menu from "./components/pages/Menu";
-import AdminPage from "./components/pages/AdminPage";
 import { useState } from "react";
+import AdminLogin from "./components/pages/AdminLogin";
 
 const App = () => {
   const [navVisible, setNavVisible] = useState(false);
@@ -17,8 +17,8 @@ const App = () => {
   };
 
   return (
-    <div className="container-fluid">
-      <div className="row">
+    <div className="app-container">
+      
         <BrowserRouter>
           <nav className="blue-bg">
             <div className="header-top">
@@ -47,8 +47,8 @@ const App = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/adminlogin" onClick={() => setNavVisible(false)}>
-                 ADD ITEM
+                <Link to="/adminLogin" onClick={() => setNavVisible(false)}>
+                  ADMIN LOGIN
                 </Link>
               </li>
               <li>
@@ -66,19 +66,18 @@ const App = () => {
               </li>
             </ul>
           </nav>
-
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/menu" element={<Menu />} />
-            <Route path="/adminlogin" element={<AdminPage />} />
-          </Routes>
-
+          <div className="content-wrapper">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/menu" element={<Menu />} />
+              <Route path="/adminLogin" element={<AdminLogin />} />
+            </Routes>
+          </div>
           <Footer />
         </BrowserRouter>
       </div>
-    </div>
   );
 };
 

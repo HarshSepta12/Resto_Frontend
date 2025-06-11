@@ -3,9 +3,10 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
 import "bootstrap/dist/css/bootstrap.css"
+import RestoProvider from './components/Context/RestoState.jsx'
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
+  <RestoProvider>
     <App />
-  </StrictMode>,
+  </RestoProvider>,
 )

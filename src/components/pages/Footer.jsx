@@ -11,7 +11,7 @@ import { FaLinkedin } from "react-icons/fa6";
 const Footer = () => {
   return (
     <>
-      <div className="container-fluid">
+      <div className="container-fluid footer">
         <div className="row p-5 bgFooter">
           <div className="col-sm-4">
             <div className="comp">
