@@ -1,5 +1,5 @@
 import "./App.css";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Link, Router } from "react-router-dom";
 import { IoRestaurant } from "react-icons/io5";
 import Home from "./components/pages/Home";
 import Contact from "./components/pages/Contact";
@@ -8,6 +8,8 @@ import About from "./components/pages/About";
 import Menu from "./components/pages/Menu";
 import { useState } from "react";
 import AdminLogin from "./components/pages/AdminLogin";
+import Register from "./components/pages/Register";
+import { ToastContainer, toast } from 'react-toastify';
 
 const App = () => {
   const [navVisible, setNavVisible] = useState(false);
@@ -17,13 +19,17 @@ const App = () => {
   };
 
   return (
+    
     <div className="app-container">
       
         <BrowserRouter>
+         <ToastContainer />
           <nav className="blue-bg">
             <div className="header-top">
               <h1 className="nav-heading">
+                <Link to="/" onClick={() => setNavVisible(false)}>
                 <IoRestaurant /> Shree Aai ji
+                </Link>
               </h1>
               <div className="hem-parent">
                 <img
@@ -52,6 +58,11 @@ const App = () => {
                 </Link>
               </li>
               <li>
+                <Link to="/register" onClick={() => setNavVisible(false)}>
+                  REGISTER
+                </Link>
+              </li>
+              <li>
                 <Link to="/menu" onClick={() => setNavVisible(false)}>
                   MENU
                 </Link>
@@ -73,6 +84,7 @@ const App = () => {
               <Route path="/about" element={<About />} />
               <Route path="/menu" element={<Menu />} />
               <Route path="/adminLogin" element={<AdminLogin />} />
+              <Route path='/register' element={<Register />} />
             </Routes>
           </div>
           <Footer />
