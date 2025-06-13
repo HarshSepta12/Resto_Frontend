@@ -452,19 +452,19 @@ const Home = () => {
                 <div className="col-md-6">
                   <input
                     type="text"
-                    className="form-control"
+                    className="form-control1"
                     placeholder="Enter Your Name"
                   />
                 </div>
                 <div className="col-md-6">
                   <input
                     type="email"
-                    className="form-control"
+                    className="form-control1"
                     placeholder="Enter Your Email"
                   />
                 </div>
                 <div className="col-md-6">
-                  <input type="datetime-local" className="form-control" />
+                  <input type="datetime-local" className="form-control1" />
                 </div>
                 <div className="col-md-6">
                   <select className="form-select" defaultValue="1">
@@ -478,7 +478,7 @@ const Home = () => {
                 </div>
                 <div className="col-12">
                   <textarea
-                    className="form-control"
+                    className="form-control1"
                     rows="3"
                     placeholder="Special Request"
                   ></textarea>

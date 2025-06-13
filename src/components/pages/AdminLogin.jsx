@@ -1,69 +1,88 @@
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import RestoContext from "../Context/RestoContaxt";
+import styles from "./AdminLogin.module.css";
 
 const AdminLogin = () => {
   const navigate = useNavigate();
-  const [formData, setFormdata] = useState({ email: "", password: "" });
-  const { url, Login } = useContext(RestoContext);
-  // console.log(url);
+  const { Login } = useContext(RestoContext);
+
+  const [formData, setFormData] = useState({ email: "", password: "" });
+  const [showPwd, setShowPwd] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormdata({ ...formData, [name]: value });
-    // console.log(formData);
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
-
-  const { email, password } = formData;
 
   const submitHandler = async (e) => {
     e.preventDefault();
+    const { email, password } = formData;
+
     const result = await Login(email, password);
-    console.log(result);
-    if (result && result.success) {
-      setFormdata({ email: "", password: "" });
+    if (result?.success) {
+      setFormData({ email: "", password: "" });
       navigate("/");
     }
   };
 
   return (
-    <>
-      <div className="container">
-        <div className="row">
-          <form action="" className="col-md-12" onSubmit={submitHandler}>
-            <div className="col-sm-12">
-              <label htmlFor="email" className="email">
-                Email
-              </label>
-              <input
-                type="email"
-                name="email"
-                className="form-control"
-                placeholder="Enter Email Here.."
-                value={email}
-                onChange={handleChange}
-              />
-            </div>
-            <div className="col-sm-12">
-              <label htmlFor="password" className="email">
-                Password
-              </label>
-              <input
-                type="password"
-                name="password"
-                className="form-control"
-                placeholder="Enter Password Here.."
-                value={password}
-                onChange={handleChange}
-              />
-            </div>
-            <div className="text-center col-sm-6">
-              <button className="btn btn-outline-warning w-75">Login</button>
-            </div>
-          </form>
+    <section className={styles.wrapper}>
+      <h2 className={styles.heading}>Sign in to your account</h2>
+
+      <form className={styles.form} onSubmit={submitHandler}>
+        {/* Email */}
+        <div className={styles.inputField}>
+          <input
+            type="email"
+            name="email"
+            id="admin-email"
+            required
+            value={formData.email}
+            onChange={handleChange}
+          />
+          <label htmlFor="admin-email">Email</label>
         </div>
-      </div>
-    </>
+
+        {/* Password */}
+        <div className={styles.inputField}>
+          <input
+            type={showPwd ? "text" : "password"}
+            name="password"
+            id="admin-password"
+            required
+            value={formData.password}
+            onChange={handleChange}
+          />
+          <label htmlFor="admin-password">Password</label>
+
+          <span
+            aria-label={showPwd ? "Hide password" : "Show password"}
+            className={styles.passIcon}
+            onClick={() => setShowPwd((p) => !p)}
+          >
+            {showPwd ? "🙈" : "👁️"}
+          </span>
+        </div>
+
+        {/* CTA */}
+        <div className={styles.btnRow}>
+          <button type="submit" className={styles.btn}>
+            Login
+          </button>
+
+          <p className={styles.text}>
+            New here?{" "}
+            <span
+              className={styles.link}
+              onClick={() => navigate("/register")}
+            >
+              Create account
+            </span>
+          </p>
+        </div>
+      </form>
+    </section>
   );
 };
 

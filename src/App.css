@@ -50,11 +50,14 @@ nav {
 /* Heading */
 .nav-heading {
   font-size: 2rem;
-  color: white;
+  color: orange;
   display: flex;
   align-items: center;
   gap: 10px;
    font-family: "JosefinSans, sansarif";
+}
+.nav-heading a{
+   color: orange !important;
 }
 
 

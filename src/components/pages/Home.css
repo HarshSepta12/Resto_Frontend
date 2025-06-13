@@ -188,12 +188,12 @@ a {
   margin-top: -1px;
   background: #fea116;
 }
-.form-control,
+.form-control1,
 .form-select {
   height: 70px !important;
 }
 
-.form-control:focus,
+.form-control1:focus,
 .form-select:focus,
 textarea:focus {
   border-color: #fea116 !important;
