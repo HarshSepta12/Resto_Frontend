@@ -1,12 +1,24 @@
-import React, { useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import styles from "./Menu.module.css"; 
-
 import { RiCupFill } from "react-icons/ri";
 import { IoRestaurant } from "react-icons/io5";
 import { MdLunchDining } from "react-icons/md";
+import RestoContext from "../Context/RestoContaxt";
 
 const Menu = () => {
   const [activeTab, setActiveTab] = useState(1);
+  const { getMenuItem, getMenuData } = useContext(RestoContext);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const menuItems = await getMenuItem();
+      console.log("Menu items from context: ", menuItems);
+    };
+
+    fetchData();
+  }, []);
+
+
 
   const menuData = [
     {

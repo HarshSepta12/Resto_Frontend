@@ -1,5 +1,5 @@
 // ThemeProvider.js
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import RestoContext from "./RestoContaxt";
 import axios from "axios";
 import { ToastContainer, toast, Bounce } from 'react-toastify';
@@ -7,7 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const RestoProvider = ({ children }) => {
   const url = "http://localhost:1200/api";
-
+  const [getMenuData, setGetMenuData] = useState([])
   //Resgister Logic
 
   const Register = async (username, email, password) => {
@@ -42,6 +42,7 @@ const RestoProvider = ({ children }) => {
       console.error("Something Went Wrong", error.message);
     }
   };
+
   //Logic Api
   const Login = async (email, password) => {
     try {
@@ -83,8 +84,30 @@ const RestoProvider = ({ children }) => {
     }
   };
 
+ const getMenuItem = async () => {
+    try {
+      const api = await axios.get(`${url}/menuItem/get`, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      setGetMenuData(api.data.getAllMenuItem);
+      return api.data.getAllMenuItem;
+    } catch (error) {
+      console.error("Login failed", error);
+    }
+  };
+
+  // Optional: preload on mount
+  useEffect(() => {
+    getMenuItem();
+  }, []);
+  
+// getMenuItem();
   return (
-    <RestoContext.Provider value={{ url, Login, Register }}>
+    <RestoContext.Provider value={{ url, Login, Register, getMenuItem, getMenuData }}>
+
+  
       {children}
     </RestoContext.Provider>
   );

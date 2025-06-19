@@ -10,6 +10,7 @@ import { useState } from "react";
 import AdminLogin from "./components/pages/AdminLogin";
 import Register from "./components/pages/Register";
 import { ToastContainer, toast } from 'react-toastify';
+import AdminNavbar from './components/AdminNavbar'
 
 const App = () => {
   const [navVisible, setNavVisible] = useState(false);
@@ -25,7 +26,7 @@ const App = () => {
         <BrowserRouter>
          <ToastContainer />
           <nav className="blue-bg">
-            <div className="header-top">
+            <div className="header-top"> 
               <h1 className="nav-heading">
                 <Link to="/" onClick={() => setNavVisible(false)}>
                 <IoRestaurant /> Shree Aai ji
@@ -47,14 +48,15 @@ const App = () => {
                   HOME
                 </Link>
               </li>
+
               <li>
                 <Link to="/about" onClick={() => setNavVisible(false)}>
                   ABOUT
                 </Link>
               </li>
               <li>
-                <Link to="/adminLogin" onClick={() => setNavVisible(false)}>
-                  ADMIN LOGIN
+                <Link to="/login" onClick={() => setNavVisible(false)}>
+                 LOGIN
                 </Link>
               </li>
               <li>
@@ -83,8 +85,9 @@ const App = () => {
               <Route path="/contact" element={<Contact />} />
               <Route path="/about" element={<About />} />
               <Route path="/menu" element={<Menu />} />
-              <Route path="/adminLogin" element={<AdminLogin />} />
+              <Route path="/login" element={<AdminLogin />} />
               <Route path='/register' element={<Register />} />
+              <Route path="/adminNavbar" element={<AdminNavbar />}/>
             </Routes>
           </div>
           <Footer />

@@ -1,0 +1,82 @@
+.appContainer {
+  font-family: 'Arial', sans-serif;
+}
+
+.navbar {
+  background-color: #005f73;
+  padding: 1rem;
+  color: white;
+  position: relative;
+}
+
+.headerTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navHeading {
+  margin: 0;
+  font-size: 1.8rem;
+}
+
+.link {
+  text-decoration: none;
+  color: white;
+  display: flex;
+  align-items: center;
+}
+
+.icon {
+  margin-right: 0.5rem;
+}
+
+.hemParent {
+  display: none;
+}
+
+.hamburger {
+  width: 30px;
+  cursor: pointer;
+}
+
+/* Navigation links */
+.navLinks {
+  display: flex;
+  gap: 1rem;
+  list-style: none;
+  padding: 0;
+  margin-top: 1rem;
+}
+
+.navLinks li a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.contentWrapper {
+  padding: 1rem;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .hemParent {
+    display: block;
+  }
+
+  .navLinks {
+    display: none;
+    flex-direction: column;
+    background-color: #003845;
+    padding: 1rem;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+  }
+
+  .show {
+    display: flex;
+  }
+}

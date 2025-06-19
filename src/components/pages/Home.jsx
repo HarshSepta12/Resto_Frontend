@@ -10,6 +10,7 @@ import { FaFacebook } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
 import { BsTwitterX } from "react-icons/bs";
 import { FaQuoteLeft } from "react-icons/fa";
+import {useNavigate} from "react-router-dom";
 
 // import WOW from "wowjs";
 // import "animate.css";
@@ -17,6 +18,8 @@ import { FaQuoteLeft } from "react-icons/fa";
 const Home = () => {
   const [activeTab, setActiveTab] = useState(1);
   const [activeIndex, setActiveIndex] = useState(0);
+  const navigate = useNavigate();
+  
 
   const menuData = [
     {
@@ -328,7 +331,7 @@ const Home = () => {
               </div>
             </div>
 
-            <button className="Read-btn">Read More</button>
+            <button className="Read-btn" onClick={() => navigate('/about')}>Read More</button>
           </div>
         </div>
 
