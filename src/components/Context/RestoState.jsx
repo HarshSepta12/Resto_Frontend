@@ -2,14 +2,21 @@
 import React, { useEffect, useState } from "react";
 import RestoContext from "./RestoContaxt";
 import axios from "axios";
-import { ToastContainer, toast, Bounce } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast, Bounce } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const RestoProvider = ({ children }) => {
   const url = "http://localhost:1200/api";
-  const [getMenuData, setGetMenuData] = useState([])
-  //Resgister Logic
+  const [getMenuData, setGetMenuData] = useState([]);
+  const [category, setcategory] = useState([]);
 
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+    }
+  }, []);
+
+  //Resgister Logic
   const Register = async (username, email, password) => {
     try {
       const api = await axios.post(
@@ -22,7 +29,7 @@ const RestoProvider = ({ children }) => {
         }
       );
 
-      console.log(api.data)
+      console.log(api.data);
       if (api.data.success == true) {
         toast("Register Successfull", {
           position: "top-right",
@@ -37,7 +44,6 @@ const RestoProvider = ({ children }) => {
         });
       }
       return api.data;
-;
     } catch (error) {
       console.error("Something Went Wrong", error.message);
     }
@@ -58,6 +64,7 @@ const RestoProvider = ({ children }) => {
 
       if (api.data.token) {
         localStorage.setItem("token", api.data.token);
+        setToken(true);
       }
       if (api.data.success === true) {
         toast("Login Successfull", {
@@ -84,7 +91,9 @@ const RestoProvider = ({ children }) => {
     }
   };
 
- const getMenuItem = async () => {
+
+  //get menu item 
+  const getMenuItem = async () => {
     try {
       const api = await axios.get(`${url}/menuItem/get`, {
         headers: {
@@ -94,20 +103,39 @@ const RestoProvider = ({ children }) => {
       setGetMenuData(api.data.getAllMenuItem);
       return api.data.getAllMenuItem;
     } catch (error) {
-      console.error("Login failed", error);
+      console.error("Menu Not Found", error);
     }
   };
 
+
+  // get Category
+  const getCatgory = async () => {
+    try {
+      const api = await axios.get(`${url}/category/get`, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+  
+      setcategory(api.data.getCategory);
+     // console.log(api.data.getCategory);
+      
+      return api.data.getCategory;
+    } catch (error) {
+      console.error("Catrgory Not Found", error);
+    }
+  };
   // Optional: preload on mount
   useEffect(() => {
     getMenuItem();
+    getCatgory();
   }, []);
-  
-// getMenuItem();
-  return (
-    <RestoContext.Provider value={{ url, Login, Register, getMenuItem, getMenuData }}>
 
-  
+  // getMenuItem();
+  return (
+    <RestoContext.Provider
+      value={{ url, Login, Register, getMenuItem, getMenuData, getCatgory, category }}
+    >
       {children}
     </RestoContext.Provider>
   );
