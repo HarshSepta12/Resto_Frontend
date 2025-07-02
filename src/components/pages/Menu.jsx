@@ -5,20 +5,17 @@ import RestoContext from "../Context/RestoContaxt";
 const Menu = () => {
   const { getMenuItem, getMenuData, category } = useContext(RestoContext);
 
-  const [activeCategoryId, setActiveCategoryId] = useState(null);
+  const [activeCategory, setActiveCategory] = useState("all");
 
   useEffect(() => {
-    if (category?.length > 0 && !activeCategoryId) {
-      setActiveCategoryId(category[0]._id);
-    }
-  }, [category]);
+    getMenuItem(); // API se menu data fetch karna
+  }, []);
 
-  const filteredItems = getMenuData?.[activeCategoryId] || [];
-  
-console.log("activeCategoryId:", activeCategoryId);
-console.log("getMenuData:", getMenuData);
-console.log("getMenuData[activeCategoryId]:", getMenuData?.[activeCategoryId]);
-
+  // Category ke hisaab se items filter karna
+  const filteredItems =
+    activeCategory === "all"
+      ? getMenuData
+      : getMenuData.filter((item) => item.category._id === activeCategory);
 
   return (
     <div className="container py-4">
@@ -26,14 +23,27 @@ console.log("getMenuData[activeCategoryId]:", getMenuData?.[activeCategoryId]);
         <div className="col-12 text-center mb-4">
           <h1 className={styles.menuTitle}>Our Menu</h1>
           <div className="d-flex flex-wrap justify-content-center gap-3">
+            {/* 'All' button */}
+            <button
+              className={`${styles.button} ${
+                activeCategory === "all" ? styles.active : ""
+              }`}
+              onClick={() => setActiveCategory("all")}
+            >
+              <span className={styles.parenticons}>🍽️ All</span>
+            </button>
+
+            {/* Dynamic category buttons */}
             {category?.map((cat) => (
               <button
                 key={cat._id}
-                className={`${styles.button} ${activeCategoryId === cat._id ? styles.active : ""}`}
-                onClick={() => setActiveCategoryId(cat._id)}
+                className={`${styles.button} ${
+                  activeCategory === cat._id ? styles.active : ""
+                }`}
+                onClick={() => setActiveCategory(cat._id)}
               >
                 <span className={styles.parenticons}>
-                  <span className={styles.icons}>{cat.icon || "🍽️"}</span>
+                  <span className={styles.icons}>{cat.icon || "🍛"}</span>
                   {cat.name}
                 </span>
               </button>
@@ -48,7 +58,7 @@ console.log("getMenuData[activeCategoryId]:", getMenuData?.[activeCategoryId]);
             <div key={index} className="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
               <div className={styles.cards}>
                 <img
-                  src={item.img}
+                  src={item.imageUrl}
                   alt={item.name}
                   className={styles.cardsimgtop}
                   style={{ height: "150px", objectFit: "cover", width: "100%" }}
