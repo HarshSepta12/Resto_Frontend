@@ -1,7 +1,9 @@
-.menuTitle {
+/* .menuTitle {
   font-size: 2.5rem;
   margin-bottom: 2rem;
   font-weight: bold;
+  text-decoration: underline orange;
+   font-family: "Pacifico", sans-serif;
 }
 
 .button {
@@ -18,41 +20,68 @@
 .active {
   background-color: orange;
   color: white;
-}
+} */
 
 .parenticons {
   display: flex;
   align-items: center;
   gap: 5px;
 }
-
 .cards {
   border: 1px solid #ddd;
   border-radius: 10px;
   overflow: hidden;
-  transition: transform 0.3s ease;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-.cards:hover {
-  transform: scale(1.02);
-}
-
-.cardsimgtop {
-  width: 100%;
-  object-fit: cover;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: #fff;
 }
 
 .cardsbody {
-  padding: 10px;
-  text-align: center;
+  padding: 1rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.button {
+  position: relative;
+  display: inline-block;
+  padding: 10px 15px;
+  font-size: 1rem;
+  cursor: pointer;
+  color: #333;
+  transition: color 0.3s ease;
+  font-weight: 500;
 }
 
-.cardstitle {
-  font-weight: bold;
+/* Underline effect */
+.button::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px; /* adjust as needed */
+  height: 2px;
+  width: 0%;
+  background-color: orange;
+  transition: width 0.3s ease-in-out;
 }
 
-.cardstext {
-  color: green;
-  font-size: 1.1rem;
+.button:hover,
+.active {
+  color: orange;
+}
+
+.button:hover::after,
+.active::after {
+  width: 100%;
+}
+
+/* Optional: for responsiveness or visual spacing */
+@media (max-width: 576px) {
+  .button {
+    font-size: 0.9rem;
+    padding: 8px 12px;
+  }
 }
