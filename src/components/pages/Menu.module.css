@@ -1,87 +1,89 @@
-/* .menuTitle {
-  font-size: 2.5rem;
-  margin-bottom: 2rem;
-  font-weight: bold;
-  text-decoration: underline orange;
-   font-family: "Pacifico", sans-serif;
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&display=swap");
+
+body {
+  font-family: "Montserrat", sans-serif;
 }
 
+.menuTitle {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+/* Filter buttons */
 .button {
-  background: none;
-  border: 2px solid orange;
-  padding: 10px 15px;
-  font-size: 1rem;
-  border-radius: 8px;
+  padding: 8px 16px;
+  margin: 0 5px;
+  font-size: 20px;
+  font-weight: 600;
+  border: none;
+  border-radius: 20px;
+  background-color: rgb(255, 118, 88);
+  color: #ffffff;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: background-color 0.3s ease;
 }
 
-.button:hover,
 .active {
-  background-color: orange;
-  color: white;
-} */
+  background-color: orangered;
+}
 
 .parenticons {
   display: flex;
   align-items: center;
   gap: 5px;
 }
-.cards {
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  background-color: #fff;
+
+.icons {
+  font-size: 1.2rem;
 }
 
+/* Card styles */
+.cards {
+  width: 100%;
+  max-width: 295px;
+  overflow: hidden;
+  border-radius: 25px;
+  border: 1px solid lavender;
+  margin: 10px auto;
+  box-shadow: 5px 5px 15px 5px rgba(230, 230, 250, 1);
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  position: relative;
+}
+
+.cardsimgtop {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
+ 
+}
 .cardsbody {
-  padding: 1rem;
-  flex-grow: 1;
+  padding: 20px 20px 16px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-}
-.button {
-  position: relative;
-  display: inline-block;
-  padding: 10px 15px;
-  font-size: 1rem;
-  cursor: pointer;
-  color: #333;
-  transition: color 0.3s ease;
-  font-weight: 500;
+  flex-grow: 1;
 }
 
-/* Underline effect */
-.button::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -4px; /* adjust as needed */
-  height: 2px;
-  width: 0%;
-  background-color: orange;
-  transition: width 0.3s ease-in-out;
+.cardstitle {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 8px;
 }
 
-.button:hover,
-.active {
-  color: orange;
+.cardstext {
+  font-size: 14px;
+  font-weight: 600;
+  color: orangered;
+  margin-bottom: 5px;
 }
 
-.button:hover::after,
-.active::after {
-  width: 100%;
-}
-
-/* Optional: for responsiveness or visual spacing */
-@media (max-width: 576px) {
-  .button {
-    font-size: 0.9rem;
-    padding: 8px 12px;
-  }
+.desc {
+  font-size: 13px;
+  margin-top: 5px;
+  color: #555;
 }

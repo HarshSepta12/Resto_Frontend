@@ -64,7 +64,7 @@ const RestoProvider = ({ children }) => {
 
       if (api.data.token) {
         localStorage.setItem("token", api.data.token);
-        setToken(true);
+       // setToken(true);
       }
       if (api.data.success === true) {
         toast("Login Successfull", {
@@ -79,6 +79,7 @@ const RestoProvider = ({ children }) => {
           transition: Bounce,
         });
       }
+console.log(api.data);
 
       return api.data;
     } catch (error) {

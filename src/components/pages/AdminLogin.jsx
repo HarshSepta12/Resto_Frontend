@@ -20,9 +20,9 @@ const AdminLogin = () => {
     const { email, password } = formData;
 
     const result = await Login(email, password);
-    console.log(result);
+    console.log("User Data is here", result);
     
-    if (result?.success && result?.role == 'admin') {
+    if (result?.success && result?.user?.role == 'admin') {
       setFormData({ email: "", password: "" });
       navigate("/adminNavbar");
     }else{

@@ -1,12 +1,17 @@
 .appContainer {
-  font-family: 'Arial', sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: sans-serif;
 }
 
 .navbar {
-  background-color: #005f73;
-  padding: 1rem;
+  background-color: #2d2d2d;
+  padding: 10px 20px;
   color: white;
-  position: relative;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
 .headerTop {
@@ -16,67 +21,77 @@
 }
 
 .navHeading {
+  font-size: 24px;
   margin: 0;
-  font-size: 1.8rem;
+  color: white;
 }
 
 .link {
   text-decoration: none;
   color: white;
-  display: flex;
-  align-items: center;
 }
 
 .icon {
-  margin-right: 0.5rem;
+  margin-right: 8px;
 }
 
 .hemParent {
   display: none;
+  cursor: pointer;
 }
 
 .hamburger {
   width: 30px;
-  cursor: pointer;
+  height: auto;
 }
 
-/* Navigation links */
 .navLinks {
   display: flex;
-  gap: 1rem;
   list-style: none;
-  padding: 0;
-  margin-top: 1rem;
+  gap: 20px;
+  padding-left: 0;
+  margin-top: 10px;
+  justify-content: center;
 }
 
 .navLinks li a {
   color: white;
   text-decoration: none;
-  font-weight: bold;
+  font-weight: 500;
 }
 
-.contentWrapper {
-  padding: 1rem;
+.navLinks li a:hover {
+  color: #f39c12;
 }
 
-/* Responsive styles */
-@media (max-width: 768px) {
+/* Hide nav links on small screens */
+@media screen and (max-width: 768px) {
   .hemParent {
     display: block;
   }
 
   .navLinks {
-    display: none;
     flex-direction: column;
-    background-color: #003845;
-    padding: 1rem;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
+    gap: 10px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    text-align: center;
   }
 
   .show {
-    display: flex;
+    max-height: 500px; /* Arbitrary large enough height */
   }
+}
+
+.contentWrapper {
+  flex: 1;
+  padding: 20px;
+}
+
+.footer {
+  background-color: #2d2d2d;
+  color: white;
+  text-align: center;
+  padding: 10px;
 }
