@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React, { useContext, useEffect, useState } from "react";
 import styles from "./MenuForm.module.css";
+import RestoContext from "./Context/RestoContaxt";
 
 const MenuForm = () => {
   const [formData, setFormData] = useState({
@@ -11,14 +11,14 @@ const MenuForm = () => {
     isAvailable: true,
     spiceLevel: "",
     ingredients: "",
-    category: "", // Start with empty to force user selection
+    category: "",
   });
 
+  const { postMenuItem, getCatgory } = useContext(RestoContext);
   const [categories, setCategories] = useState([]);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-
     setFormData((prev) => ({
       ...prev,
       [name]: type === "checkbox" ? checked : value,
@@ -31,16 +31,36 @@ const MenuForm = () => {
     const finalData = {
       ...formData,
       price: Number(formData.price),
-      ingredients: formData.ingredients.split(",").map((item) => item.trim()),
+      ingredients: formData.ingredients
+        .split(",")
+        .map((item) => item.trim())
+        .filter(Boolean),
     };
 
     try {
-      const res = await axios.post(
-        "http://localhost:1200/api/menuItem/post",
-        finalData
+      const response = await postMenuItem(
+        finalData.name,
+        finalData.description,
+        finalData.price,
+        finalData.imageUrl,
+        finalData.isAvailable,
+        finalData.spiceLevel,
+        finalData.ingredients,
+        finalData.category
       );
-      alert("Item Added Successfully!");
-      console.log(res.data);
+      console.log("Menu item added:", response);
+
+      // Optional: Clear form after successful submit
+      setFormData({
+        name: "",
+        description: "",
+        price: "",
+        imageUrl: "",
+        isAvailable: true,
+        spiceLevel: "",
+        ingredients: "",
+        category: "",
+      });
     } catch (err) {
       console.error("Error submitting data", err);
     }
@@ -49,18 +69,15 @@ const MenuForm = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const res = await axios.get("http://localhost:1200/api/category/get");
-        const catData = res.data.categories || res.data || [];
-        setCategories(catData.getCategory);
-        console.log(catData.getCategory);
-         
+        const cats = await getCatgory();
+        setCategories(cats || []);
       } catch (err) {
         console.error("Error fetching categories", err);
       }
     };
 
     fetchCategories();
-  }, []);
+  }, [getCatgory]);
 
   return (
     <div className="container">
@@ -159,12 +176,11 @@ const MenuForm = () => {
                 required
               >
                 <option value="">Select Category</option>
-                {Array.isArray(categories) &&
-                  categories.map((cat) => (
-                    <option key={cat._id} value={cat._id}>
-                      {cat.name}
-                    </option>
-                  ))}
+                {categories.map((cat) => (
+                  <option key={cat._id} value={cat._id}>
+                    {cat.name}
+                  </option>
+                ))}
               </select>
             </div>
 

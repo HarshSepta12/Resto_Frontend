@@ -335,166 +335,150 @@ const Home = () => {
           </div>
         </div>
 
-        <div className="row text-dark p-5">
-          <div className="col-sm-12 text-center">
-            <h5 className="food-menu text-center">Food Menu</h5>
-            <h1 className="most">Most Popular Items</h1>
-            <div className="tab-class text-center">
-              <ul className="nav nav-pills d-inline-flex justify-content-center border-bottom mb-5">
-                <li className="nav-item">
-                  <button
-                    className={`d-flex align-items-center text-start mx-3 ms-0 pb-3 btn-tab ${
-                      activeTab === 1 ? "active" : ""
-                    }`}
-                    onClick={() => setActiveTab(1)}
-                  >
-                    <h1 style={{ color: "#FEA116" }}>
-                      <RiCupFill />
-                    </h1>
-                    <div className="ps-3">
-                      <small className="text-secondary">Popular</small>
-                      <h6 className="text-dark fw-bolder">Breakfast</h6>
-                    </div>
-                  </button>
-                </li>
-                <li className="nav-item">
-                  <button
-                    className={`d-flex align-items-center text-start mx-3 ms-0 pb-3 btn-tab ${
-                      activeTab === 2 ? "active" : ""
-                    }`}
-                    onClick={() => setActiveTab(2)}
-                  >
-                    <h1 style={{ color: "#FEA116" }}>
-                      <MdLunchDining />
-                    </h1>
-                    <div className="ps-3">
-                      <small className="text-secondary">Special</small>
-                      <h6 className="text-dark fw-bolder">Lunch</h6>
-                    </div>
-                  </button>
-                </li>
-                <li className="nav-item">
-                  <button
-                    className={`d-flex align-items-center text-start mx-3 ms-0 pb-3 btn-tab ${
-                      activeTab === 3 ? "active" : ""
-                    }`}
-                    onClick={() => setActiveTab(3)}
-                  >
-                    <h1 style={{ color: "#FEA116" }}>
-                      <IoRestaurant />
-                    </h1>
-                    <div className="ps-3">
-                      <small className="text-secondary">Lovely</small>
-                      <h6 className="text-dark fw-bolder">Dinner</h6>
-                    </div>
-                  </button>
-                </li>
-              </ul>
+       <div className="row text-dark p-5">
+  <div className="col-sm-12 text-center">
+    <h5 className="food-menu">Food Menu</h5>
+    <h1 className="most">Most Popular Items</h1>
+    <div className="tab-class text-center">
+      <ul className="nav nav-pills d-inline-flex justify-content-center border-bottom mb-5">
+        <li className="nav-item">
+          <button
+            className={`d-flex align-items-center text-start mx-3 ms-0 pb-3 btn-tab ${
+              activeTab === 1 ? "active" : ""
+            }`}
+            onClick={() => setActiveTab(1)}
+          >
+            <h1 style={{ color: "#FEA116" }}>
+              <RiCupFill />
+            </h1>
+            <div className="ps-3">
+              <small className="text-secondary">Popular</small>
+              <h6 className="text-dark fw-bolder">Breakfast</h6>
+            </div>
+          </button>
+        </li>
+        <li className="nav-item">
+          <button
+            className={`d-flex align-items-center text-start mx-3 ms-0 pb-3 btn-tab ${
+              activeTab === 2 ? "active" : ""
+            }`}
+            onClick={() => setActiveTab(2)}
+          >
+            <h1 style={{ color: "#FEA116" }}>
+              <MdLunchDining />
+            </h1>
+            <div className="ps-3">
+              <small className="text-secondary">Special</small>
+              <h6 className="text-dark fw-bolder">Lunch</h6>
+            </div>
+          </button>
+        </li>
+        <li className="nav-item">
+          <button
+            className={`d-flex align-items-center text-start mx-3 ms-0 pb-3 btn-tab ${
+              activeTab === 3 ? "active" : ""
+            }`}
+            onClick={() => setActiveTab(3)}
+          >
+            <h1 style={{ color: "#FEA116" }}>
+              <IoRestaurant />
+            </h1>
+            <div className="ps-3">
+              <small className="text-secondary">Lovely</small>
+              <h6 className="text-dark fw-bolder">Dinner</h6>
+            </div>
+          </button>
+        </li>
+      </ul>
 
-              {/* Menu Items */}
-              <div className="row">
-                <div className="col-md-12 d-flex flex-wrap justify-content-between gap-4">
-                  {menuData
-                    .find((menu) => menu.id === activeTab)
-                    .items.map((item, index) => (
-                      <div
-                        key={index}
-                        className="menu-item "
-                        style={{
-                          flexBasis: "45%",
-                          display: "flex",
-                          alignItems: "center",
-                          padding: "10px",
-                          border: "1px solid #ddd",
-                          borderRadius: "8px",
-                          background: "#fff",
-                          boxShadow: "2px 2px 10px rgba(0, 0, 0, 0.1)",
-                        }}
-                      >
-                        <img
-                          src={`/img/${item.img}`}
-                          alt={item.name}
-                          className="img-fluid rounded"
-                          width={90}
-                          height={70}
-                        />
-                        <div className="ps-3 text-start w-100">
-                          <h5 className="d-flex  justify-content-between align-items-center border-bottom pb-2">
-                            <p>{item.name}</p>
-                            <p className="Doller-style">{item.price}</p>
-                          </h5>
-                          <small className="fst-italic">
-                            Delicious {item.name}
-                          </small>
-                        </div>
-                      </div>
-                    ))}
+      {/* Menu Items */}
+      <div className="row">
+        <div className="col-md-12 d-flex flex-wrap justify-content-between">
+          {menuData
+            .find((menu) => menu.id === activeTab)
+            .items.map((item, index) => (
+              <div key={index} className="menu-item">
+                <img
+                  src={`/img/${item.img}`}
+                  alt={item.name}
+                  className="img-fluid rounded"
+                />
+                <div className="ps-3 text-start w-100">
+                  <h5 className="d-flex justify-content-between align-items-center border-bottom pb-2">
+                    <p>{item.name}</p>
+                    <p className="Doller-style">{item.price}</p>
+                  </h5>
+                  <small className="fst-italic">Delicious {item.name}</small>
                 </div>
               </div>
-            </div>
-          </div>
+            ))}
         </div>
-        <div className="row g-0">
-          {/* Image Section */}
-          <div className="col-md-6">
-            <img
-              src="/img/TableBook.jpg"
-              alt="TableBookIMg"
-              className="img-fluid w-100 h-100"
-              style={{ objectFit: "cover" }}
-            />
-          </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-          {/* Form Section */}
-          <div className="col-md-6 bgdark d-flex align-items-center">
-            <div className="w-100 p-4">
-              <h6 className="reser-heading">Reservation</h6>
-              <h1>Book A Table Online</h1>
+<div className="row g-0">
+  {/* Image Section */}
+  <div className="col-md-6">
+    <img
+      src="/img/TableBook.jpg"
+      alt="TableBookIMg"
+      className="img-fluid w-100 h-100"
+      style={{ objectFit: "cover" }}
+    />
+  </div>
 
-              <form className="row g-3">
-                <div className="col-md-6">
-                  <input
-                    type="text"
-                    className="form-control1"
-                    placeholder="Enter Your Name"
-                  />
-                </div>
-                <div className="col-md-6">
-                  <input
-                    type="email"
-                    className="form-control1"
-                    placeholder="Enter Your Email"
-                  />
-                </div>
-                <div className="col-md-6">
-                  <input type="datetime-local" className="form-control1" />
-                </div>
-                <div className="col-md-6">
-                  <select className="form-select" defaultValue="1">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                  </select>
-                </div>
-                <div className="col-12">
-                  <textarea
-                    className="form-control1"
-                    rows="3"
-                    placeholder="Special Request"
-                  ></textarea>
-                </div>
-                <div className="d-grid gap-2 col-12 mx-auto">
-                  <button className="btn btn-warning book-btn" type="button">
-                    Book Now
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
+  {/* Form Section */}
+  <div className="col-md-6 bgdark d-flex align-items-center">
+    <div className="w-100 p-4">
+      <h6 className="reser-heading">Reservation</h6>
+      <h1>Book A Table Online</h1>
+
+      <form className="row g-3">
+        <div className="col-md-6">
+          <input
+            type="text"
+            className="form-control1"
+            placeholder="Enter Your Name"
+          />
         </div>
+        <div className="col-md-6">
+          <input
+            type="email"
+            className="form-control1"
+            placeholder="Enter Your Email"
+          />
+        </div>
+        <div className="col-md-6">
+          <input type="datetime-local" className="form-control1" />
+        </div>
+        <div className="col-md-6">
+          <select className="form-select" defaultValue="1">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+          </select>
+        </div>
+        <div className="col-12">
+          <textarea
+            className="form-control1"
+            rows="3"
+            placeholder="Special Request"
+          ></textarea>
+        </div>
+        <div className="d-grid gap-2 col-12 mx-auto">
+          <button className="btn btn-warning book-btn" type="button">
+            Book Now
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
 
         <div className="row mt-5">
           <div className="col-sm-12">

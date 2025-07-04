@@ -1,16 +1,14 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
 import AdminNavbar from "../components/AdminNavbar";
-import Footer from "../components/pages/Footer";
 
 const AdminLayout = () => {
   return (
     <>
       <AdminNavbar />
-      <div className="admin-content">
+      <div className="admin-content-wrapper">
         <Outlet />
       </div>
-      <Footer />
     </>
   );
 };

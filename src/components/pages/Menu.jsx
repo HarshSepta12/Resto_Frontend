@@ -11,6 +11,9 @@ const Menu = () => {
     getMenuItem();
   }, []);
 
+  console.log("category", category);
+
+  
   const filteredItems =
     activeCategory === "all"
       ? getMenuData

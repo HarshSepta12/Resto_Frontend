@@ -2,6 +2,8 @@ import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import RestoContext from "../Context/RestoContaxt";
 import styles from "./AdminLogin.module.css";
+import {  toast, Bounce } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const AdminLogin = () => {
   const navigate = useNavigate();
@@ -24,10 +26,26 @@ const AdminLogin = () => {
     
     if (result?.success && result?.user?.role == 'admin') {
       setFormData({ email: "", password: "" });
-      navigate("/adminNavbar");
-    }else{
+      navigate("/dashboard");
+    }
+    else if(result?.success && result?.user?.role == 'user'){
         setFormData({ email: "", password: "" });
-        navigate("/");
+      navigate("/menu")
+    }
+    else {
+        setFormData({ email: "", password: "" });
+        toast(result?.message, {
+          position: "top-right",
+          autoClose: 1000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
+
     }
   };
 

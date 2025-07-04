@@ -2,19 +2,29 @@
 import React, { useEffect, useState } from "react";
 import RestoContext from "./RestoContaxt";
 import axios from "axios";
-import { ToastContainer, toast, Bounce } from "react-toastify";
+import {  toast, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const RestoProvider = ({ children }) => {
   const url = "http://localhost:1200/api";
   const [getMenuData, setGetMenuData] = useState([]);
   const [category, setcategory] = useState([]);
+  const [haveToken, setHaveToken] = useState(false);
+  const [admin, setAdmin] = useState(false);
 
+
+  // Checking Toekn from loacal Storage
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
+      setHaveToken(true);
     }
   }, []);
+
+  const handleLogout = () => {
+  localStorage.removeItem("token");
+  setHaveToken(false);
+};
 
   //Resgister Logic
   const Register = async (username, email, password) => {
@@ -64,7 +74,6 @@ const RestoProvider = ({ children }) => {
 
       if (api.data.token) {
         localStorage.setItem("token", api.data.token);
-       // setToken(true);
       }
       if (api.data.success === true) {
         toast("Login Successfull", {
@@ -79,7 +88,11 @@ const RestoProvider = ({ children }) => {
           transition: Bounce,
         });
       }
-console.log(api.data);
+      setHaveToken(true);
+      console.log(api.data);
+   if(api.data.user.role == "admin"){
+    setAdmin(true);
+   }
 
       return api.data;
     } catch (error) {
@@ -109,33 +122,67 @@ console.log(api.data);
   };
 
 
+  // post menuitem
+  const postMenuItem = async ( name, description, price, imageUrl, isAvailable, 
+    spiceLevel, ingredients, category) => {
+      try {
+        const api = await axios.post(
+        `${url}/menuItem/post`,
+        { name, description, price, imageUrl, isAvailable, 
+    spiceLevel, ingredients, category },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      
+      if (api.data.success === true) {
+        toast("Item Added To Database", {
+          position: "top-right",
+          autoClose: 1000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
+      }
+         return api.data;
+      } catch (error) {
+        console.error(error.message);
+      }
+    }
   // get Category
   const getCatgory = async () => {
-    try {
-      const api = await axios.get(`${url}/category/get`, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-  
-      setcategory(api.data.getCategory);
-     // console.log(api.data.getCategory);
-      
-      return api.data.getCategory;
-    } catch (error) {
-      console.error("Catrgory Not Found", error);
-    }
-  };
+  try {
+    const api = await axios.get(`${url}/category/get`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    setcategory(api.data.getCategory)
+    return api.data.getCategory; 
+
+  } catch (error) {
+    console.error("Category Not Found", error);
+    return [];
+  }
+};
+
   // Optional: preload on mount
   useEffect(() => {
     getMenuItem();
     getCatgory();
+    
   }, []);
 
   // getMenuItem();
   return (
     <RestoContext.Provider
-      value={{ url, Login, Register, getMenuItem, getMenuData, getCatgory, category }}
+      value={{ url, Login, Register, getMenuItem, getMenuData, getCatgory, category ,setHaveToken, haveToken, handleLogout, postMenuItem,admin, setAdmin}}
     >
       {children}
     </RestoContext.Provider>

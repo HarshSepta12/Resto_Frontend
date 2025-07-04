@@ -118,79 +118,78 @@ li {
   text-transform: capitalize;
   width: 200px;
 }
+/* General Styles */
+body {
+  margin: 0;
+  font-family: "Nunito", sans-serif;
+}
+
+.row {
+  margin: 0; /* Remove default margin */
+}
+
+/* Food Menu Section */
 .food-menu {
   color: #fea116;
   font-family: "Pacifico", sans-serif;
   position: relative;
+  margin-bottom: 20px; /* Add margin for spacing */
 }
-.food-menu::before {
-  position: absolute;
-  content: "";
-  width: 45px;
-  height: 2px;
-  top: 50%;
-  margin-left: -60px;
-  margin-top: -1px;
-  background: #fea116;
-}
-.food-menu::after {
-  position: absolute;
-  content: "";
-  width: 45px;
-  height: 2px;
-  top: 50%;
-  margin-left: 10px !important;
-  margin-top: -1px;
-  background: #fea116;
-}
+
 .most {
-  font-family: "Nunito", sans-serif;
-  font-weight: 800 !important;
+  font-weight: 800;
+  margin-bottom: 30px; /* Add margin for spacing */
 }
-a {
-  text-decoration: none !important;
+
+.tab-class {
+  margin-bottom: 30px; /* Add margin for spacing */
 }
-.Doller-style {
-  color: #fea116;
-  font-weight: bold;
-  font-size: 22px;
-}
-.dblock {
-  display: block !important;
-}
-.dnone {
-  display: none !important;
-}
+
 .btn-tab {
   border: none;
   background-color: transparent;
+  cursor: pointer;
 }
-.active {
-  border-bottom: 2px solid #fea116;
+
+.btn-tab.active {
+  border-bottom: 2px solid #fea116; /* Highlight active tab */
 }
+
+/* Menu Items */
+.menu-item {
+  flex: 1 1 45%; /* Allow items to grow and shrink */
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+  margin: 10px; /* Add margin for spacing */
+}
+
+.menu-item img {
+  max-width: 90px; /* Responsive image size */
+  height: auto; /* Maintain aspect ratio */
+}
+
+/* Reservation Section */
 .bgdark {
   background-color: #0f172b !important;
 }
+
 .reser-heading {
   font-family: "Pacifico", sans-serif;
   color: #fea116;
   font-weight: 400;
   font-size: 1.78rem;
   position: relative;
+  margin-bottom: 20px; /* Add margin for spacing */
 }
-.reser-heading::after {
-  position: absolute;
-  content: "";
-  width: 45px;
-  height: 2px;
-  top: 59%;
-  left: 150px;
-  margin-top: -1px;
-  background: #fea116;
-}
+
 .form-control1,
 .form-select {
-  height: 70px !important;
+  height: 50px; /* Adjust height for inputs */
 }
 
 .form-control1:focus,
@@ -201,18 +200,41 @@ textarea:focus {
   outline: none !important;
 }
 
-.book-btn:focus {
-  box-shadow: 0 0 0 0.2rem rgba(254, 161, 22, 0.5) !important;
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .menu-item {
+    flex: 1 1 100%; /* Stack menu items on smaller screens */
+    margin: 10px 0; /* Adjust margin for spacing */
+  }
+
+  .col-md-6 {
+    flex: 1 1 100%; /* Stack columns on smaller screens */
+  }
+
+  .book-btn {
+    width: 100%; /* Full width button */
+  }
+
+  .form-control1,
+  .form-select {
+    width: 100%; /* Full width for inputs */
+  }
 }
 
-/* h1, h2, h3, h4, h5, h6{
-    margin-top: 0 !important;
-    margin-bottom: .5rem !important;
-    font-family: "Nunito", sans-serif !important;
-    font-weight: 800 !important;
-    line-height: 1.2 !important;
-    color: #0F172B  !important;
-} */
+@media (max-width: 576px) {
+  .food-menu {
+    font-size: 1.5rem; /* Adjust font size for smaller screens */
+  }
+
+  .most {
+    font-size: 2rem; /* Adjust font size for smaller screens */
+  }
+
+  .btn-tab {
+    font-size: 0.9rem; /* Adjust button font size */
+  }
+}
+
 
 .master-chef{
   text-align: center;

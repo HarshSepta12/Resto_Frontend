@@ -1,6 +1,7 @@
 .navbarContainer {
-  background-color: rgb(160, 160, 160);
-  color: rgb(0, 0, 0);
+  /* background-color: rgb(2, 1, 24); */
+  background-color: #000000;
+  color: rgb(255, 255, 255);
   padding: 15px 20px;
   position: sticky;
   top: 0;
@@ -14,7 +15,7 @@
 }
 
 .navLogo a {
-  color: orangered;
+  color: rgb(255, 255, 255);
   font-size: 1.6rem;
   text-decoration: none;
   display: flex;
@@ -23,9 +24,8 @@
   font-weight: bold;
 }
 
-.hamburger img {
-  width: 30px;
-  height: 30px;
+.hamburger{
+  
   cursor: pointer;
   display: none;
 }
@@ -43,17 +43,18 @@
 .navLinks li {
   display: flex;
   align-items: center;
+    color: white;
 }
 
 .navLinks a {
-  color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
   text-decoration: none;
   font-weight: 500;
   transition: 0.3s;
 }
 
 .navLinks a:hover {
-  color: #ffc107;
+  color: #ffc107; 
 }
 
 .bookBtn {
@@ -73,14 +74,17 @@
 
 /* Responsive styles */
 @media (max-width: 768px) {
-  .hamburger img {
+  .hamburger  {
     display: block;
+  
   }
 
   .navLinks {
     display: none;
     flex-direction: column;
-    background-color: #e0a800;
+    /* background-color: rgb(2, 1, 24); */
+    background-color: black;
+    color: white;
     width: 100%;
     margin-top: 10px;
     padding: 15px 0;
@@ -101,4 +105,13 @@
     margin: 0 auto;
     text-align: center;
   }
+}
+.logoutBtn{
+  background-color: transparent;
+  border: none;
+  color: white;
+  transition: 0.3s ease-in-out;
+}
+.logoutBtn:hover{
+  color: #ffc107; 
 }

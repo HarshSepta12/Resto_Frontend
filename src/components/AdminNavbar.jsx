@@ -1,29 +1,14 @@
 import React, { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { IoRestaurant } from "react-icons/io5";
-import MenuForm from "./MenuForm";
-import AdminDashboard from "./pages/AdminDashboard";
-import Footer from "./pages/Footer";
 import styles from "./AdminNavbar.module.css";
 
 const AdminNavbar = () => {
   const [navVisible, setNavVisible] = useState(false);
-  const location = useLocation(); // to render component based on current path
 
   const toggleNavbar = () => {
     setNavVisible(!navVisible);
-  };
-
-  const renderContent = () => {
-    switch (location.pathname) {
-      case "/adminNavbar":
-        return <MenuForm />;
-      case "/dashboard":
-        return <AdminDashboard />;
-      default:
-        return <MenuForm />; // fallback
-    }
   };
 
   return (
@@ -48,19 +33,13 @@ const AdminNavbar = () => {
 
         <ul className={`${styles.navLinks} ${navVisible ? styles.show : ""}`}>
           <li>
-            <Link to="/adminNavbar" onClick={() => setNavVisible(false)}>MENU FORM</Link>
+            <Link to="/menuform" onClick={() => setNavVisible(false)}>MENU FORM</Link>
           </li>
           <li>
             <Link to="/dashboard" onClick={() => setNavVisible(false)}>DASHBOARD</Link>
           </li>
         </ul>
       </nav>
-
-      <div className={styles.contentWrapper}>
-        {renderContent()}
-      </div>
-
-      <Footer />
     </div>
   );
 };
