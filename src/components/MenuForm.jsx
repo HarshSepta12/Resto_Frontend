@@ -50,7 +50,7 @@ const MenuForm = () => {
       );
       console.log("Menu item added:", response);
 
-      // Optional: Clear form after successful submit
+      // Reset form
       setFormData({
         name: "",
         description: "",
@@ -80,23 +80,23 @@ const MenuForm = () => {
   }, [getCatgory]);
 
   return (
-    <div className="container">
-      <div className="row p-5">
-        <h2 className={styles.heading}>Add Menu Item</h2>
-        <div className="col-md-6 col-sm-12">
+    <div className={styles.container}>
+      <h2 className={styles.heading}>Add Menu Item</h2>
+      <div className={styles.formRow}>
+        <div className={styles.inputGroup}>
           <img
             src="/img/menuAdded.png"
             alt="menuAdded img"
-            className="img-fluid"
+            className={styles.image}
           />
         </div>
-        <div className="col-md-6 col-sm-12">
-          <form onSubmit={handleSubmit} className="row g-3">
-            <div className="col-md-6">
-              <label className="form-label">Name</label>
+        <div className={styles.inputGroup}>
+          <form onSubmit={handleSubmit} className={styles.formContainer}>
+            <div className={styles.inputGroup}>
+              <label className={styles.label}>Name</label>
               <input
                 type="text"
-                className="form-control"
+                className={styles.input}
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
@@ -104,11 +104,11 @@ const MenuForm = () => {
               />
             </div>
 
-            <div className="col-md-6">
-              <label className="form-label">Price</label>
+            <div className={styles.inputGroup}>
+              <label className={styles.label}>Price</label>
               <input
                 type="number"
-                className="form-control"
+                className={styles.input}
                 name="price"
                 value={formData.price}
                 onChange={handleChange}
@@ -116,31 +116,31 @@ const MenuForm = () => {
               />
             </div>
 
-            <div className="col-12">
-              <label className="form-label">Description</label>
+            <div className={styles.inputGroup}>
+              <label className={styles.label}>Description</label>
               <textarea
-                className="form-control"
+                className={styles.textarea}
                 name="description"
                 value={formData.description}
                 onChange={handleChange}
               ></textarea>
             </div>
 
-            <div className="col-12">
-              <label className="form-label">Image URL</label>
+            <div className={styles.inputGroup}>
+              <label className={styles.label}>Image URL</label>
               <input
                 type="text"
-                className="form-control"
+                className={styles.input}
                 name="imageUrl"
                 value={formData.imageUrl}
                 onChange={handleChange}
               />
             </div>
 
-            <div className="col-md-4">
-              <label className="form-label">Spice Level</label>
+            <div className={styles.inputGroup}>
+              <label className={styles.label}>Spice Level</label>
               <select
-                className="form-select"
+                className={styles.select}
                 name="spiceLevel"
                 value={formData.spiceLevel}
                 onChange={handleChange}
@@ -153,23 +153,23 @@ const MenuForm = () => {
               </select>
             </div>
 
-            <div className="col-md-4">
-              <label className="form-label">
+            <div className={styles.inputGroup}>
+              <label className={styles.label}>
                 Ingredients (comma separated)
               </label>
               <input
                 type="text"
-                className="form-control"
+                className={styles.input}
                 name="ingredients"
                 value={formData.ingredients}
                 onChange={handleChange}
               />
             </div>
 
-            <div className="col-md-4">
-              <label className="form-label">Select Category</label>
+            <div className={styles.inputGroup}>
+              <label className={styles.label}>Select Category</label>
               <select
-                className="form-select"
+                className={styles.select}
                 name="category"
                 value={formData.category}
                 onChange={handleChange}
@@ -184,21 +184,19 @@ const MenuForm = () => {
               </select>
             </div>
 
-            <div className="col-md-4 d-flex align-items-center mt-4">
-              <div className="form-check">
-                <input
-                  className="form-check-input"
-                  type="checkbox"
-                  name="isAvailable"
-                  checked={formData.isAvailable}
-                  onChange={handleChange}
-                />
-                <label className="form-check-label">Is Available?</label>
-              </div>
+            <div className={styles.checkboxContainer}>
+              <input
+                className={styles.input}
+                type="checkbox"
+                name="isAvailable"
+                checked={formData.isAvailable}
+                onChange={handleChange}
+              />
+              <label className={styles.label}>Is Available?</label>
             </div>
 
-            <div className="col-12">
-              <button type="submit" className="btn btn-primary">
+            <div>
+              <button type="submit" className={styles.submitButton}>
                 Add Menu Item
               </button>
             </div>

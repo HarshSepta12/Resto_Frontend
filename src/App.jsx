@@ -16,7 +16,7 @@ import AdminDashboard from "./components/pages/AdminDashboard";
 // Layouts
 import AdminLayout from "./Layout/AdminLayout";
 import PublicLayout from "./Layout/PublicLayout";
-import AdminNavbar from "./components/AdminNavbar";
+import Booktable from "./components/pages/Booktable";
 
 const App = () => {
   return (
@@ -31,6 +31,7 @@ const App = () => {
     <Route path="/menu" element={<Menu />} />
     <Route path="/register" element={<Register />} />
     <Route path="/login" element={<AdminLogin />} />
+    <Route path="/booktable" element={<Booktable />} />
   </Route>
 
   {/* Admin layout */}

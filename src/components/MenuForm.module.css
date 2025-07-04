@@ -1,5 +1,114 @@
-.heading{
-     font-family: "JosefinSans, sansarif";
-     text-align: center;
-     text-decoration: 3px solid underline orange;
+.container {
+  margin-top: -28rem !important;
+  padding-top: 0 !important;
+
+}
+.heading {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  color: #333;
+}
+
+.formRow {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* align-items: center; */
+  gap: 2rem;
+}
+
+.image {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  display: block;
+  margin: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+}
+
+.label {
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #555;
+}
+
+.input,
+.textarea,
+.select {
+  padding: 0.6rem 0.8rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #fff;
+  transition: border-color 0.3s ease;
+}
+
+.input:focus,
+.textarea:focus,
+.select:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.checkboxContainer {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.submitButton {
+  padding: 0.8rem 1.5rem;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submitButton:hover {
+  background-color: #0056b3;
+}
+
+/* Responsive Styles */
+@media (min-width: 768px) {
+  .formRow {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .inputGroup {
+    flex: 1;
+  }
+
+  .formContainer {
+    padding-left: 2rem;
+  }
+
+  .image {
+    margin: 0;
+  }
 }

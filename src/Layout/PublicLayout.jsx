@@ -15,14 +15,13 @@ const PublicLayout = () => {
     setNavVisible(!navVisible);
   };
 
-const handleLogout = () => {
-  localStorage.removeItem("token");
-  setHaveToken(false);
-  setNavVisible(false);
-  setAdmin(false);
-  window.location.href = "/"; 
-};
-
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    setHaveToken(false);
+    setNavVisible(false);
+    setAdmin(false);
+    window.location.href = "/";
+  };
 
   return (
     <>
@@ -40,45 +39,65 @@ const handleLogout = () => {
         </div>
 
         <ul className={`${styles.navLinks} ${navVisible ? styles.show : ""}`}>
-          <li><Link to="/" onClick={() => setNavVisible(false)}>HOME</Link></li>
-          <li><Link to="/about" onClick={() => setNavVisible(false)}>ABOUT</Link></li>
+          <li>
+            <Link to="/" onClick={() => setNavVisible(false)}>
+              HOME
+            </Link>
+          </li>
+          <li>
+            <Link to="/about" onClick={() => setNavVisible(false)}>
+              ABOUT
+            </Link>
+          </li>
 
-        
-      {haveToken ? (
-  <>
-    {admin && (
-      <li>
-        <Link to="/dashboard" onClick={() => setNavVisible(false)}>
-          ADMIN PANEL
-        </Link>
-      </li>
-    )}
-    <li>
-      <button onClick={handleLogout} className={styles.logoutBtn}>
-        LOGOUT
-      </button>
-    </li>
-  </>
-) : (
-  <>
-    <li>
-      <Link to="/login" onClick={() => setNavVisible(false)}>
-        LOGIN
-      </Link>
-    </li>
-    <li>
-      <Link to="/register" onClick={() => setNavVisible(false)}>
-        REGISTER
-      </Link>
-    </li>
-  </>
-)}
+          {haveToken ? (
+            <>
+              {admin && (
+                <li>
+                  <Link to="/dashboard" onClick={() => setNavVisible(false)}>
+                    ADMIN PANEL
+                  </Link>
+                </li>
+              )}
+              <li>
+                <button onClick={handleLogout} className={styles.logoutBtn}>
+                  LOGOUT
+                </button>
+              </li>
+            </>
+          ) : (
+            <>
+              <li>
+                <Link to="/login" onClick={() => setNavVisible(false)}>
+                  LOGIN
+                </Link>
+              </li>
+              <li>
+                <Link to="/register" onClick={() => setNavVisible(false)}>
+                  REGISTER
+                </Link>
+              </li>
+            </>
+          )}
 
-
-
-          <li><Link to="/menu" onClick={() => setNavVisible(false)}>MENU</Link></li>
-          <li><Link to="/contact" onClick={() => setNavVisible(false)}>CONTACT</Link></li>
-          <li><button className={styles.bookBtn}>BOOK TABLE</button></li>
+          <li>
+            <Link to="/menu" onClick={() => setNavVisible(false)}>
+              MENU
+            </Link>
+          </li>
+          <li>
+            <Link to="/contact" onClick={() => setNavVisible(false)}>
+              CONTACT
+            </Link>
+          </li>
+          <li>
+            <button
+              className={styles.bookBtn}
+              onClick={() => navigate("/booktable")}
+            >
+              BOOK TABLE
+            </button>
+          </li>
         </ul>
       </nav>
 

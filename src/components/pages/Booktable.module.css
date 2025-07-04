@@ -1,0 +1,37 @@
+.bgdark {
+  background: #121212;
+}
+
+.heading {
+  color: #ffc107;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.input {
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 6px;
+}
+
+.textarea {
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 6px;
+  resize: none;
+}
+
+.bookBtn {
+  font-size: 18px;
+  font-weight: bold;
+  padding: 12px;
+  border-radius: 8px;
+  transition: 0.3s ease;
+}
+
+.bookBtn:hover {
+  background-color: #e0a800;
+  color: #fff;
+}
