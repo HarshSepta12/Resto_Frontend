@@ -3,36 +3,44 @@ import styles from "./Menu.module.css";
 import RestoContext from "../Context/RestoContaxt";
 
 const Menu = () => {
-  const { getMenuItem, getMenuData, category } = useContext(RestoContext);
+  const {
+    getMenuItem,
+    getMenuData,
+    category,
+    setItemQuantities,
+    itemQuantities,
+    getUserCart,
+    itemDecreaseFromCart,
+  } = useContext(RestoContext);
   const [activeCategory, setActiveCategory] = useState("all");
-  const [quantities, setQuantities] = useState({});
+  //const [itemQuantities, setitemQuantities] = useState({});
+  const { itemAdd } = useContext(RestoContext);
+
+  // const user = JSON.parse(localStorage.getItem("user"));
+  // const userId = user?._id || user.id;
+  // console.log(user);
 
   useEffect(() => {
     getMenuItem();
+    getUserCart();
   }, []);
 
-  console.log("category", category);
-
-  
+  //  menuItemId, name, price, quantity
   const filteredItems =
     activeCategory === "all"
       ? getMenuData
       : getMenuData.filter((item) => item.category._id === activeCategory);
 
-  const handleIncrement = (id) => {
-    setQuantities((prev) => ({
-      ...prev,
-      [id]: (prev[id] || 0) + 1,
-    }));
+  // console.log("filteredItems", filteredItems);
+  const handleIncrement = async (menuItemID, name, price) => {
+    await itemAdd(menuItemID, name, price, 1);
+    await getUserCart();
   };
 
-  const handleDecrement = (id) => {
-    setQuantities((prev) => ({
-      ...prev,
-      [id]: prev[id] > 0 ? prev[id] - 1 : 0,
-    }));
+  const handleDecrement = async (menuItemID) => {
+    await itemDecreaseFromCart(menuItemID);
+    await getUserCart();
   };
-
   return (
     <div className="container py-4">
       {/* Title and Filters */}
@@ -84,7 +92,9 @@ const Menu = () => {
                 <div className={styles.cardsbody}>
                   <div>
                     <h5 className={styles.cardstitle}>{item.name}</h5>
-                    <p className={styles.cardstext}>₹{item.price}</p>
+                    <p className={styles.cardstext}>
+                      ₹{itemQuantities[item._id]?.price || item.price}
+                    </p>
                     <p className={styles.desc}>{item.description}</p>
                   </div>
 
@@ -92,15 +102,20 @@ const Menu = () => {
                     <button
                       onClick={() => handleDecrement(item._id)}
                       className="btn btn-outline-danger btn-sm px-3"
+                      disabled={!item.isAvailable}
                     >
                       –
                     </button>
                     <span className="fw-bold fs-6">
-                      {quantities[item._id] || 0}
+                      {itemQuantities[item._id]?.quantity || 0}
                     </span>
+
                     <button
-                      onClick={() => handleIncrement(item._id)}
+                      onClick={() =>
+                        handleIncrement(item._id, item.name, item.price)
+                      }
                       className="btn btn-outline-success btn-sm px-3"
+                      disabled={!item.isAvailable}
                     >
                       +
                     </button>
