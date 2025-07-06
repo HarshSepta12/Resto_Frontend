@@ -1,0 +1,120 @@
+.navbarContainer {
+  /* background-color: rgb(2, 1, 24); */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  place-items: baseline;
+  background-color: #000000;
+  color: rgb(255, 255, 255);
+  padding: 15px 20px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  height: 80px;
+}
+
+.navbarInner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navLogo a {
+  color: #ffc107;
+  font-size: 1.6rem;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: bold;
+}
+
+.hamburger {
+  cursor: pointer;
+  display: none;
+}
+
+.navLinks {
+  list-style: none;
+  display: flex;
+  justify-content: flex-end;
+  gap: 20px;
+  padding: 0;
+  margin: 15px 0 0 0;
+  flex-wrap: wrap;
+}
+
+.navLinks li {
+  display: flex;
+  align-items: center;
+  color: white;
+}
+
+.navLinks a {
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.navLinks a:hover {
+  color: #ffc107;
+}
+
+.bookBtn {
+  background-color: #ffc107;
+  color: #003366;
+  border: none;
+  padding: 8px 16px;
+  font-weight: 600;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.bookBtn:hover {
+  background-color: #e0a800;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .hamburger {
+    display: block;
+  }
+
+  .navLinks {
+    display: none;
+    flex-direction: column;
+    /* background-color: rgb(2, 1, 24); */
+    background-color: black;
+    color: white;
+    width: 100%;
+    margin-top: 10px;
+    padding: 15px 0;
+    border-top: 1px solid #ffffff33;
+  }
+
+  .show {
+    display: flex;
+  }
+
+  .navLinks li {
+    justify-content: center;
+    margin: 10px 0;
+  }
+
+  .bookBtn {
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+  }
+}
+.logoutBtn {
+  background-color: transparent;
+  border: none;
+  color: white;
+  transition: 0.3s ease-in-out;
+}
+.logoutBtn:hover {
+  color: #ffc107;
+}

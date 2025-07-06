@@ -1,0 +1,62 @@
+@font-face {
+  font-family: "Nunito";
+  src: url("/Font/Nunito-VariableFont_wght.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Pacifico";
+  src: url("/Font/Pacifico-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Josefin Sans";
+  src: url("/Font/JosefinSans-VariableFont_wght.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  font-family: "Nunito", sans-serif !important;
+}
+
+.container-fluid {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.bgc {
+  background-image: linear-gradient(
+      rgba(15, 23, 43, 0.9),
+      rgba(15, 23, 43, 0.9)
+    ),
+    url("/images/bgc.webp");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-position: center;
+  background-attachment: scroll;
+}
+
+.nav-heading {
+  color: orange;
+}
+
+li {
+  list-style: none;
+  color: orange;
+}
+
+.book-btn {
+  background-color: orange;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+}
+
+.text-bgc {
+  font-weight: 800;
+  line-height: 1.2;
+}

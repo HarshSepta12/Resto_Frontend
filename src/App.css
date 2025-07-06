@@ -1,0 +1,134 @@
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; 
+  padding: 0;
+  margin: 0;
+}
+
+.content-wrapper {
+  flex: 1; 
+}
+
+ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+li {
+  margin: 0;
+}
+a {
+  text-decoration: none;
+  color: rgb(255, 255, 255) !important;
+      font-family: "JosefinSans, sansarif";
+}
+
+nav {
+  display: flex !important;            
+  flex-wrap: nowrap !important;       
+  justify-content: space-around !important;
+  align-items: center;
+  padding: 10px 20px;
+}
+.blue-bg {
+  position: sticky;
+  top: 0;
+  z-index: 111;
+  background-color: rgb(4, 4, 14);
+}
+
+/* Top Header Row */
+.header-top {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  width: 100%; 
+}
+
+
+/* Heading */
+.nav-heading {
+  font-size: 2rem;
+  color: orange;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+   font-family: "JosefinSans, sansarif";
+}
+.nav-heading a{
+   color: orange !important;
+}
+
+
+.nav-links {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  transition: all 0.3s ease;
+ width: 100%;
+}
+
+/* Button Style */
+.book-btn {
+  background-color: orange;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+/* Hamburger Image */
+.hemburge {
+  width: 30px;
+  height: 30px;
+  display: none;
+  cursor: pointer;
+  color: #fff !important;
+}
+.hem-parent{
+  /* color: orange; */
+  background-color: orange;
+}
+
+/* Mobile Styles */
+@media screen and (max-width: 768px) {
+  .nav-heading {
+    font-size: 1.5rem;
+  }
+  nav {
+    flex-wrap: wrap;         /* Chhote screen par wrap kar sakte hain */
+    flex-direction: column;  /* Vertical stacking for small devices */
+    align-items: flex-start; /* Left align */
+  }
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+    padding: 10px 0;
+    width: 100%;
+  }
+
+  .nav-links.show {
+    display: flex;
+  }
+
+  .hemburge {
+    display: block;
+  }
+
+  .book-btn {
+    width: 100%;
+  }
+}
+
+/* Extra Small Devices */
+@media screen and (max-width: 576px) {
+  .book-btn {
+    font-size: 0.9rem;
+    padding: 8px 16px;
+  }
+}
