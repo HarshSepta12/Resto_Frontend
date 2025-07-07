@@ -337,7 +337,8 @@ console.log(token);
         itemAdd,
         setItemQuantities,
         itemQuantities,
-        getUserCart
+        getUserCart,
+        itemDecreaseFromCart
       }}
     >
       {children}
