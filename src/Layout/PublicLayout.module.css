@@ -1,5 +1,5 @@
+
 .navbarContainer {
-  /* background-color: rgb(2, 1, 24); */
   background-color: #000000;
   color: rgb(255, 255, 255);
   padding: 15px 20px;
@@ -8,11 +8,13 @@
   z-index: 1000;
 }
 
+
 .navbarInner {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
+
 
 .navLogo a {
   color: #ffc107;
@@ -74,21 +76,18 @@
 
 /* Responsive styles */
 @media (max-width: 768px) {
-  .hamburger  {
+  .hamburger {
     display: block;
-  
   }
 
   .navLinks {
     display: none;
     flex-direction: column;
-    /* background-color: rgb(2, 1, 24); */
     background-color: black;
-    color: white;
     width: 100%;
-    margin-top: 10px;
-    padding: 15px 0;
+    padding: 15px 20px;
     border-top: 1px solid #ffffff33;
+    margin-top: 10px;
   }
 
   .show {
@@ -106,6 +105,7 @@
     text-align: center;
   }
 }
+
 .logoutBtn{
   background-color: transparent;
   border: none;

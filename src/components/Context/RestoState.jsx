@@ -6,7 +6,11 @@ import { toast, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const RestoProvider = ({ children }) => {
-  const url = "http://localhost:1200/api";
+ //debugger time 
+ // // const url = "http://localhost:1200/api";
+
+ //deployment time
+ const url = "https://resto-api-3f6g.onrender.com/api";
   const [getMenuData, setGetMenuData] = useState([]);
   const [category, setcategory] = useState([]);
   const [haveToken, setHaveToken] = useState(false);
