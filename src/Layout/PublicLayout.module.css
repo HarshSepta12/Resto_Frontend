@@ -1,4 +1,3 @@
-
 .navbarContainer {
   background-color: #000000;
   color: rgb(255, 255, 255);
@@ -7,14 +6,14 @@
   top: 0;
   z-index: 1000;
 }
-
+/* Harsh Septa Sirvi  */
 
 .navbarInner {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
 }
-
 
 .navLogo a {
   color: #ffc107;
@@ -26,8 +25,7 @@
   font-weight: bold;
 }
 
-.hamburger{
-  
+.hamburger {
   cursor: pointer;
   display: none;
 }
@@ -45,7 +43,7 @@
 .navLinks li {
   display: flex;
   align-items: center;
-    color: white;
+  color: white;
 }
 
 .navLinks a {
@@ -56,7 +54,7 @@
 }
 
 .navLinks a:hover {
-  color: #ffc107; 
+  color: #ffc107;
 }
 
 .bookBtn {
@@ -72,6 +70,16 @@
 
 .bookBtn:hover {
   background-color: #e0a800;
+}
+
+.logoutBtn {
+  background-color: transparent;
+  border: none;
+  color: white;
+  transition: 0.3s ease-in-out;
+}
+.logoutBtn:hover {
+  color: #ffc107;
 }
 
 /* Responsive styles */
@@ -104,14 +112,4 @@
     margin: 0 auto;
     text-align: center;
   }
-}
-
-.logoutBtn{
-  background-color: transparent;
-  border: none;
-  color: white;
-  transition: 0.3s ease-in-out;
-}
-.logoutBtn:hover{
-  color: #ffc107; 
 }

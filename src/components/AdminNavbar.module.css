@@ -1,10 +1,15 @@
+
 .appContainer {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  /* min-height: 100vh; */
   font-family: sans-serif;
+  margin-top: 10px;
 }
-
+.heading{
+  text-align: center;
+     font-family: "JosefinSans, sansarif";
+}
 .navbar {
   background-color: #2d2d2d;
   padding: 10px 20px;

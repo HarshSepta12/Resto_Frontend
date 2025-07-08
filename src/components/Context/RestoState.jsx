@@ -6,28 +6,36 @@ import { toast, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const RestoProvider = ({ children }) => {
- //debugger time 
- // // const url = "http://localhost:1200/api";
+  //debugger time
+  // // const url = "http://localhost:1200/api";
 
- //deployment time
- const url = "https://resto-api-3f6g.onrender.com/api";
+  //deployment time
+  const url = "https://resto-api-3f6g.onrender.com/api";
   const [getMenuData, setGetMenuData] = useState([]);
   const [category, setcategory] = useState([]);
   const [haveToken, setHaveToken] = useState(false);
   const [admin, setAdmin] = useState(false);
   const [itemQuantities, setItemQuantities] = useState({});
 
-  // Checking Toekn from loacal Storage
   useEffect(() => {
     const token = localStorage.getItem("token");
+    const isAdmin = localStorage.getItem("isAdmin"); // tum token ke sath admin flag bhi save karo
+
     if (token) {
       setHaveToken(true);
+    }
+
+    if (isAdmin === "true") {
+      setAdmin(true);
     }
   }, []);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("isAdmin");
+    localStorage.removeItem("user");
     setHaveToken(false);
+    setAdmin(false);
   };
 
   //Resgister Logic
@@ -97,9 +105,12 @@ const RestoProvider = ({ children }) => {
       setHaveToken(true);
       console.log(api.data);
       if (api.data.user.role == "admin") {
+        localStorage.setItem("token", api.data.token);
+        localStorage.setItem("isAdmin", "true");
+        setHaveToken(true);
         setAdmin(true);
       }
-  await getUserCart();
+      await getUserCart();
       return api.data;
     } catch (error) {
       console.error("Login failed", error);
@@ -207,7 +218,7 @@ const RestoProvider = ({ children }) => {
           },
         }
       );
-  if (api.data.success === true) {
+      if (api.data.success === true) {
         toast("Item Added To Cart", {
           position: "top-right",
           autoClose: 1000,
@@ -221,8 +232,7 @@ const RestoProvider = ({ children }) => {
         });
         await getUserCart();
       }
-     return api.data;
-
+      return api.data;
     } catch (error) {
       console.error(
         "Add to cart failed:",
@@ -231,95 +241,91 @@ const RestoProvider = ({ children }) => {
     }
   };
 
-
   //decreseCart item
 
-const itemDecreaseFromCart = async (menuItemId) => {
-  const token = localStorage.getItem("token");
-console.log("Token: ", localStorage.getItem("token"));
+  const itemDecreaseFromCart = async (menuItemId) => {
+    const token = localStorage.getItem("token");
+    console.log("Token: ", localStorage.getItem("token"));
 
-  try {
-    const api = await axios.put(
-      `${url}/Addtocart/decrease`,
-      { menuItemId },
-      {
+    try {
+      const api = await axios.put(
+        `${url}/Addtocart/decrease`,
+        { menuItemId },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (api.data.success === true) {
+        toast("Item Decreased From Cart", {
+          position: "top-right",
+          autoClose: 1000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
+
+        await getUserCart();
+      }
+
+      console.log(api.data);
+      return api.data;
+    } catch (error) {
+      console.error(
+        "Decrease item from cart failed:",
+        error?.response?.data?.message || error.message
+      );
+    }
+  };
+
+  // Get UserCart
+  const getUserCart = async () => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      console.warn("🚫 No token found for getUserCart");
+      return;
+    }
+    console.log(token);
+
+    try {
+      const res = await axios.get(`${url}/Addtocart/getCart`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
+      });
+
+      if (res.data.success) {
+        const itemMap = {};
+        res.data.data.forEach((item) => {
+          itemMap[item.menuItemId] = {
+            quantity: item.quantity,
+            price: item.price,
+          };
+        });
+
+        setItemQuantities(itemMap);
+        console.log("🛒 Cart fetched:", itemMap);
       }
-    );
-
-    if (api.data.success === true) {
-      toast("Item Decreased From Cart", {
-        position: "top-right",
-        autoClose: 1000,
-        hideProgressBar: false,
-        closeOnClick: false,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        transition: Bounce,
-      });
-
-      await getUserCart();
+    } catch (err) {
+      console.error("❌ Failed to fetch cart items", err);
     }
-
-    console.log(api.data);
-    return api.data;
-  } catch (error) {
-    console.error(
-      "Decrease item from cart failed:",
-      error?.response?.data?.message || error.message
-    );
-  }
-};
-
-
-// Get UserCart 
-const getUserCart = async () => {
-  const token = localStorage.getItem("token");
-  if (!token) {
-    console.warn("🚫 No token found for getUserCart");
-    return;
-  }
-console.log(token);
-
-  try {
-    const res = await axios.get(`${url}/Addtocart/getCart`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-
-    if (res.data.success) {
-      const itemMap = {};
-      res.data.data.forEach(item => {
-        itemMap[item.menuItemId] = {
-          quantity: item.quantity,
-          price: item.price,
-        };
-      });
-
-      setItemQuantities(itemMap);
-      console.log("🛒 Cart fetched:", itemMap);
-    }
-  } catch (err) {
-    console.error("❌ Failed to fetch cart items", err);
-  }
-};
-
-
+  };
 
   // Optional: preload on mount
   useEffect(() => {
     getMenuItem();
     getCatgory();
-   const token = localStorage.getItem("token");
-  if (token) {
-    getUserCart();
-  }
-  }, []);
+    const token = localStorage.getItem("token");
+    if (token) {
+      getUserCart();
+    }
+  }, [haveToken]);
 
   // getMenuItem();
   return (
@@ -342,7 +348,7 @@ console.log(token);
         setItemQuantities,
         itemQuantities,
         getUserCart,
-        itemDecreaseFromCart
+        itemDecreaseFromCart,
       }}
     >
       {children}

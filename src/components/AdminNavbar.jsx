@@ -12,6 +12,8 @@ const AdminNavbar = () => {
   };
 
   return (
+    <>
+      <h1 className={styles.heading}>Admin Dashboard</h1>
     <div className={styles.appContainer}>
       <ToastContainer />
       <nav className={styles.navbar}>
@@ -41,6 +43,11 @@ const AdminNavbar = () => {
         </ul>
       </nav>
     </div>
+
+    </>
+    
+
+
   );
 };
 
