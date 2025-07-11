@@ -1,4 +1,6 @@
-.parent_sidebar{
+.Menuitem_parent{
 width: 100%;
 background-color: #b81717;
+position: relative;
+left: -1rem !important;
 }

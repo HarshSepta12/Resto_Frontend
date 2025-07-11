@@ -26,7 +26,7 @@ const AdminLogin = () => {
     
     if (result?.success && result?.user?.role == 'admin') {
       setFormData({ email: "", password: "" });
-      navigate("/dashboard");
+      navigate("/menuitem");
     }
     else if(result?.success && result?.user?.role == 'user'){
         setFormData({ email: "", password: "" });
