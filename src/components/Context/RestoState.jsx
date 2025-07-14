@@ -7,14 +7,16 @@ import "react-toastify/dist/ReactToastify.css";
 
 const RestoProvider = ({ children }) => {
   //debugger time
- //  const url = "http://localhost:1200/api";
+ // const url = "http://localhost:1200/api";
 
   //deployment time
-  const url = "https://resto-api-3f6g.onrender.com/api";
+    const url = "https://resto-api-3f6g.onrender.com/api";
+
   const [getMenuData, setGetMenuData] = useState([]);
   const [category, setcategory] = useState([]);
   const [haveToken, setHaveToken] = useState(false);
   const [admin, setAdmin] = useState(false);
+  const [user, setUser] = useState([]);
   const [itemQuantities, setItemQuantities] = useState({});
 
   useEffect(() => {
@@ -131,8 +133,8 @@ const RestoProvider = ({ children }) => {
         },
       });
       setGetMenuData(api.data.getAllMenuItem);
-     // console.log(api.data.getAllMenuItem);
-      
+      // console.log(api.data.getAllMenuItem);
+
       return api.data.getAllMenuItem;
     } catch (error) {
       console.error("Menu Not Found", error);
@@ -140,19 +142,17 @@ const RestoProvider = ({ children }) => {
   };
 
   //delete item
-  const deletMenuItem = async(id) => {
+  const deletMenuItem = async (id) => {
     const token = localStorage.getItem("token");
-    
+
     try {
-      const api = await axios.delete(`${url}/menuItem/delete/${id}`, 
-         {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
+      const api = await axios.delete(`${url}/menuItem/delete/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       if (api.data.success === true) {
-          toast(api.data.message, {
+        toast(api.data.message, {
           position: "top-right",
           autoClose: 1000,
           hideProgressBar: false,
@@ -163,7 +163,10 @@ const RestoProvider = ({ children }) => {
           theme: "light",
           transition: Bounce,
         });
-        await getUserCart();
+        if (api.data.success === true) {
+          await getMenuItem();
+          await getUserCart();
+        }
       }
       return api.data;
     } catch (error) {
@@ -172,7 +175,29 @@ const RestoProvider = ({ children }) => {
         error?.response?.data?.message || error.message
       );
     }
+  };
+
+  // Edit menuitem
+
+const updateMenuItem = async (id, updatedData) => {
+  const token = localStorage.getItem("token");
+  try {
+    const res = await axios.put(`${url}/menuItem/update/${id}`, updatedData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (res.data.success) {
+      toast.success("Item updated successfully");
+      await getMenuItem(); 
+    }
+  } catch (err) {
+    toast.error("Update failed");
+    console.error(err);
   }
+};
 
   // post menuitem
   const postMenuItem = async (
@@ -325,10 +350,10 @@ const RestoProvider = ({ children }) => {
   const getUserCart = async () => {
     const token = localStorage.getItem("token");
     if (!token) {
-      console.warn("🚫 No token found for getUserCart");
+     // console.warn("🚫 No token found for getUserCart");
       return;
     }
-    console.log(token);
+   // console.log(token);
 
     try {
       const res = await axios.get(`${url}/Addtocart/getCart`, {
@@ -354,15 +379,39 @@ const RestoProvider = ({ children }) => {
     }
   };
 
+
+   // get all user
+const getAllUsers = async () => {
+  const token = localStorage.getItem("token");
+  try {
+    const api = await axios.get(`${url}/user/getAllUser`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (api.data.success) {
+      setUser(api.data.AllUser); // ✅ correct setter
+    }
+  } catch (error) {
+    console.error("❌ Failed to fetch all users", error);
+  }
+};
+
+
+
+
   // Optional: preload on mount
   useEffect(() => {
     getMenuItem();
     getCatgory();
+    getAllUsers();
     const token = localStorage.getItem("token");
     if (token) {
       getUserCart();
     }
-  }, [haveToken, getMenuData]);
+  }, [haveToken]);
 
   // getMenuItem();
   return (
@@ -386,7 +435,9 @@ const RestoProvider = ({ children }) => {
         itemQuantities,
         getUserCart,
         itemDecreaseFromCart,
-        deletMenuItem
+        deletMenuItem,
+        updateMenuItem,
+        user, setUser, getAllUsers
       }}
     >
       {children}

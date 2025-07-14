@@ -9,6 +9,7 @@
 /* Optional: Add scroll for small screens */
 .Menuitem_parent {
   padding: 10px;
+  margin-left: -12rem;
 }
 
 @media screen and (max-width: 576px) {
