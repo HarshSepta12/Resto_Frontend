@@ -7,10 +7,10 @@ import "react-toastify/dist/ReactToastify.css";
 
 const RestoProvider = ({ children }) => {
   //debugger time
-   const url = "http://localhost:1200/api";
+ //  const url = "http://localhost:1200/api";
 
   //deployment time
-  //const url = "https://resto-api-3f6g.onrender.com/api";
+  const url = "https://resto-api-3f6g.onrender.com/api";
   const [getMenuData, setGetMenuData] = useState([]);
   const [category, setcategory] = useState([]);
   const [haveToken, setHaveToken] = useState(false);
@@ -131,11 +131,48 @@ const RestoProvider = ({ children }) => {
         },
       });
       setGetMenuData(api.data.getAllMenuItem);
+     // console.log(api.data.getAllMenuItem);
+      
       return api.data.getAllMenuItem;
     } catch (error) {
       console.error("Menu Not Found", error);
     }
   };
+
+  //delete item
+  const deletMenuItem = async(id) => {
+    const token = localStorage.getItem("token");
+    
+    try {
+      const api = await axios.delete(`${url}/menuItem/delete/${id}`, 
+         {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      if (api.data.success === true) {
+          toast(api.data.message, {
+          position: "top-right",
+          autoClose: 1000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
+        await getUserCart();
+      }
+      return api.data;
+    } catch (error) {
+      console.error(
+        "Add to cart failed:",
+        error?.response?.data?.message || error.message
+      );
+    }
+  }
 
   // post menuitem
   const postMenuItem = async (
@@ -325,7 +362,7 @@ const RestoProvider = ({ children }) => {
     if (token) {
       getUserCart();
     }
-  }, [haveToken]);
+  }, [haveToken, getMenuData]);
 
   // getMenuItem();
   return (
@@ -349,6 +386,7 @@ const RestoProvider = ({ children }) => {
         itemQuantities,
         getUserCart,
         itemDecreaseFromCart,
+        deletMenuItem
       }}
     >
       {children}
