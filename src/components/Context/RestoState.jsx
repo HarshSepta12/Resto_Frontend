@@ -7,10 +7,10 @@ import "react-toastify/dist/ReactToastify.css";
 
 const RestoProvider = ({ children }) => {
   //debugger time
- // const url = "http://localhost:1200/api";
+ const url = "http://localhost:1200/api";
 
   //deployment time
-    const url = "https://resto-api-3f6g.onrender.com/api";
+   // const url = "https://resto-api-3f6g.onrender.com/api";
 
   const [getMenuData, setGetMenuData] = useState([]);
   const [category, setcategory] = useState([]);
@@ -123,6 +123,49 @@ const RestoProvider = ({ children }) => {
       };
     }
   };
+
+
+  //update user
+
+const updateUser = async (id, updatedData) => {
+  const token = localStorage.getItem("token");
+  try {
+    const res = await axios.put(`${url}/user/updateUser/${id}`, updatedData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (res.data.success) {
+      toast.success("User updated successfully");
+      getAllUsers(); // refresh list
+    }
+  } catch (err) {
+    toast.error("Failed to update user");
+    console.error(err);
+  }
+};
+
+// Delete user
+const deleteUser = async (id) => {
+  const token = localStorage.getItem("token");
+  try {
+    const res = await axios.delete(`${url}/user/deleteUser/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (res.data.success) {
+      toast.success("User deleted");
+      getAllUsers(); // refresh list
+    }
+  } catch (err) {
+    toast.error("Delete failed");
+    console.error(err);
+  }
+};
 
   //get menu item
   const getMenuItem = async () => {
@@ -436,8 +479,8 @@ const getAllUsers = async () => {
         getUserCart,
         itemDecreaseFromCart,
         deletMenuItem,
-        updateMenuItem,
-        user, setUser, getAllUsers
+        updateMenuItem, 
+        user, setUser, getAllUsers, updateUser, deleteUser
       }}
     >
       {children}
