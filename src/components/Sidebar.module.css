@@ -1,7 +1,8 @@
+/* Sidebar.module.css */
 .sidebar {
   position: fixed;
   top: 0;
-  left: -250px; /* hidden by default */
+  left: -230px;
   width: 230px;
   height: 100%;
   background-color: #333;
@@ -12,15 +13,16 @@
 }
 
 .open {
-  left: 0px;
+  left: 0;
 }
 
 .nav {
-  display: flex;
+  display: flex !important;
   flex-direction: column;
   gap: 1rem;
-  margin-top: 24px;
+  margin-top: 44px;
 }
+
 .notActive {
   color: white;
   opacity: 0.8;
@@ -38,9 +40,8 @@
   left: 15px;
   z-index: 1100;
   cursor: pointer;
-  color: rgb(0, 0, 0);
-  font-weight: 900;
-  /* background-color: #000000; */
+  color: white;
   padding: 5px;
-  border-radius: 5px;
+  background-color: #333;
+  border-radius: 4px;
 }

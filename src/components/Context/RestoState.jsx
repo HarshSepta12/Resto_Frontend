@@ -7,10 +7,10 @@ import "react-toastify/dist/ReactToastify.css";
 
 const RestoProvider = ({ children }) => {
   //debugger time
- //const url = "http://localhost:1200/api";
+ const url = "http://localhost:1200/api";
 
   //deployment time
-    const url = "https://resto-api-3f6g.onrender.com/api";
+  //  const url = "https://resto-api-3f6g.onrender.com/api";
 
   const [getMenuData, setGetMenuData] = useState([]);
   const [category, setcategory] = useState([]);
@@ -21,7 +21,7 @@ const RestoProvider = ({ children }) => {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    const isAdmin = localStorage.getItem("isAdmin"); // tum token ke sath admin flag bhi save karo
+    const isAdmin = localStorage.getItem("isAdmin"); 
 
     if (token) {
       setHaveToken(true);
