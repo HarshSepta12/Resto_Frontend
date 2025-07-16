@@ -32,7 +32,7 @@ const MenuItem = () => {
 
   return (
     <div className={styles.Menuitem_parent}>
-      <h1 className='text-center'>All Menu</h1>
+      <h1 className='text-center' style={{fontFamily:" 'Nunito' sans-serif "}}>All Menu</h1>
       <div className="table-responsive">
         <table className="table table-dark table-bordered table-hover">
           <thead>

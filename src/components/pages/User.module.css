@@ -2,6 +2,7 @@
 
 .container {
   padding: 20px;
+  margin-left: 2rem;
 }
 
 .heading {
@@ -9,6 +10,8 @@
   margin-bottom: 20px;
   font-size: 2rem;
   color: #333;
+  font-weight: 900;
+font-family: "Nunito", sans-serif !important;
 }
 
 .tableWrapper {

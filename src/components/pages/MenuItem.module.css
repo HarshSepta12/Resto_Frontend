@@ -1,7 +1,7 @@
 
 .imgStyle {
-  width: 60px;
-  height: 60px;
+  width: 60px !important;
+  height: 60px !important;
   object-fit: cover;
   border-radius: 8px;
 }
@@ -9,7 +9,7 @@
 /* Optional: Add scroll for small screens */
 .Menuitem_parent {
   padding: 10px;
-  margin-left: -12rem;
+  margin-left: 2rem;
 }
 
 @media screen and (max-width: 576px) {
