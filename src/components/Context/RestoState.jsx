@@ -7,12 +7,12 @@ import "react-toastify/dist/ReactToastify.css";
 
 const RestoProvider = ({ children }) => {
   //debugger time
- const url = "http://localhost:1200/api";
+// const url = "http://localhost:1200/api";
 
   //deployment time
-  //  const url = "https://resto-api-3f6g.onrender.com/api";
+    const url = "https://resto-api-3f6g.onrender.com/api";
 
-  const [getMenuData, setGetMenuData] = useState([]);
+  const [getMenuData, setGetMenuData] = useState("");
   const [getMenuDataById, setGetMenuDataById] = useState("");
   const [category, setcategory] = useState([]);
   const [haveToken, setHaveToken] = useState(false);
@@ -178,8 +178,8 @@ const deleteUser = async (id) => {
       });
     
 
-      setGetMenuDataById(api.data.product);
-      console.log("Your Product is here...", api.data.product);
+      setGetMenuData(api.data.getAllMenuItem);
+    // console.log("Your Product is here...", getMenuData);
       return api.data.getAllMenuItem;
     } catch (error) {
       console.error("Menu Not Found", error);
@@ -225,6 +225,7 @@ const deleteUser = async (id) => {
   // Menu by id
 const getMenuByid = async(id) => {
 const token = localStorage.getItem("token");
+console.log(id);
 
     try {
       const api = await axios.get(`${url}/menuItem/get/${id}`, {
@@ -237,9 +238,9 @@ const token = localStorage.getItem("token");
           await getMenuItem();
           await getUserCart();
         }
-        setGetMenuDataById(api.data.product)
-        console.log("Your Prodcut is here...", getMenuDataById);
-      return api.data;
+        console.log("Your Prodcut is here...", api.data);
+        setGetMenuDataById(api.data.product);
+      return api.data.product;
     } catch (error) {
       console.error(
         "Add to cart failed:",
@@ -443,7 +444,7 @@ const updateMenuItem = async (id, updatedData) => {
         });
 
         setItemQuantities(itemMap);
-        console.log("🛒 Cart fetched:", itemMap);
+        //console.log("🛒 Cart fetched:", itemMap);
       }
     } catch (err) {
       console.error("❌ Failed to fetch cart items", err);
@@ -473,7 +474,7 @@ const getAllUsers = async () => {
 
 
 
-  // Optional: preload on mount
+
   useEffect(() => {
     getMenuItem();
     getCatgory();

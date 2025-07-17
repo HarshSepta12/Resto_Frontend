@@ -24,7 +24,7 @@ const navigate = useNavigate();
 
 
   const handleProductClick = async (id) => {
-  await getMenuByid(id); // context से API call
+  await getMenuByid(id); 
   navigate("/productspecificpage");
 };
   useEffect(() => {
@@ -38,7 +38,7 @@ const navigate = useNavigate();
       ? getMenuData
       : getMenuData.filter((item) => item.category._id === activeCategory);
 
-  // console.log("filteredItems", filteredItems);
+   //console.log("getMenuData", getMenuData);
   const handleIncrement = async (menuItemID, name, price) => {
     await itemAdd(menuItemID, name, price, 1);
     await getUserCart();

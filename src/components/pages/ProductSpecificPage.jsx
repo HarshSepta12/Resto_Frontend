@@ -6,6 +6,7 @@ import styles from "./ProductSpecificPage.module.css";
 const ProductSpecificPage = () => {
   const { getMenuDataById } = useContext(RestoContext);
   const navigate = useNavigate();
+// console.log(getMenuDataById);
 
   if (!getMenuDataById) {
     return <div className={styles.loading}>Loading Product...</div>;
@@ -23,7 +24,7 @@ const ProductSpecificPage = () => {
           <p className={styles.description}>{description}</p>
           <h4 className={styles.price}>₹{price}</h4>
           <button className={styles.button}>Order Now</button>
-          <button className={styles.back} onClick={() => navigate("/")}>
+          <button className={styles.back} onClick={() => navigate("/menu")}>
             ⬅ Go Back
           </button>
         </div>
