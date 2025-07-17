@@ -18,33 +18,36 @@ import AdminLayout from "./Layout/AdminLayout";
 import PublicLayout from "./Layout/PublicLayout";
 import Booktable from "./components/pages/Booktable";
 import Users from "./components/pages/User";
+import ProductSpecificPage from "./components/pages/ProductSpecificPage.jsx";
 
 const App = () => {
   return (
     <BrowserRouter>
       <ToastContainer />
-    <Routes>
-  {/* Public layout */}
-  <Route element={<PublicLayout />}>
-    <Route path="/" element={<Home />} />
-    <Route path="/about" element={<About />} />
-    <Route path="/contact" element={<Contact />} />
-    <Route path="/menu" element={<Menu />} />
-    <Route path="/register" element={<Register />} />
-    <Route path="/login" element={<AdminLogin />} />
-    <Route path="/booktable" element={<Booktable />} />
-  </Route>
+      <Routes>
+        {/* Public layout */}
+        <Route element={<PublicLayout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/menu" element={<Menu />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<AdminLogin />} />
+          <Route path="/booktable" element={<Booktable />} />
+          <Route
+            path="/productspecificpage"
+            element={<ProductSpecificPage />}
+          />
+        </Route>
 
-  {/* Admin layout */}
-<Route element={<AdminLayout />}>
-
-  {/* <Route path="/" element={<AdminNavbar />} /> */}
-  <Route path="/menuitem" element={<MenuItem />} />
-  <Route path="/menuform" element={<MenuForm />} />
-  <Route path="/users" element={<Users />} /> {/* NEW */}
-</Route>
-
-</Routes>
+        {/* Admin layout */}
+        <Route element={<AdminLayout />}>
+          {/* <Route path="/" element={<AdminNavbar />} /> */}
+          <Route path="/menuitem" element={<MenuItem />} />
+          <Route path="/menuform" element={<MenuForm />} />
+          <Route path="/users" element={<Users />} /> {/* NEW */}
+        </Route>
+      </Routes>
     </BrowserRouter>
   );
 };

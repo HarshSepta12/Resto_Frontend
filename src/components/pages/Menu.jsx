@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import styles from "./Menu.module.css";
 import RestoContext from "../Context/RestoContaxt";
+import { useNavigate } from "react-router-dom";
 
 const Menu = () => {
   const {
@@ -11,15 +12,21 @@ const Menu = () => {
     itemQuantities,
     getUserCart,
     itemDecreaseFromCart,
+    getMenuByid
   } = useContext(RestoContext);
   const [activeCategory, setActiveCategory] = useState("all");
   //const [itemQuantities, setitemQuantities] = useState({});
   const { itemAdd } = useContext(RestoContext);
-
+const navigate = useNavigate();
   // const user = JSON.parse(localStorage.getItem("user"));
   // const userId = user?._id || user.id;
   // console.log(user);
 
+
+  const handleProductClick = async (id) => {
+  await getMenuByid(id); // context से API call
+  navigate("/productspecificpage");
+};
   useEffect(() => {
     getMenuItem();
     getUserCart();
@@ -87,6 +94,7 @@ const Menu = () => {
                   src={item.imageUrl}
                   alt={item.name}
                   className={styles.cardsimgtop}
+               onClick={() => handleProductClick(item._id)}
                 />
 
                 <div className={styles.cardsbody}>

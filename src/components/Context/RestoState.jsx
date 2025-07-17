@@ -7,12 +7,13 @@ import "react-toastify/dist/ReactToastify.css";
 
 const RestoProvider = ({ children }) => {
   //debugger time
-// const url = "http://localhost:1200/api";
+ const url = "http://localhost:1200/api";
 
   //deployment time
-    const url = "https://resto-api-3f6g.onrender.com/api";
+  //  const url = "https://resto-api-3f6g.onrender.com/api";
 
   const [getMenuData, setGetMenuData] = useState([]);
+  const [getMenuDataById, setGetMenuDataById] = useState("");
   const [category, setcategory] = useState([]);
   const [haveToken, setHaveToken] = useState(false);
   const [admin, setAdmin] = useState(false);
@@ -175,9 +176,10 @@ const deleteUser = async (id) => {
           "Content-Type": "application/json",
         },
       });
-      setGetMenuData(api.data.getAllMenuItem);
-      // console.log(api.data.getAllMenuItem);
+    
 
+      setGetMenuDataById(api.data.product);
+      console.log("Your Product is here...", api.data.product);
       return api.data.getAllMenuItem;
     } catch (error) {
       console.error("Menu Not Found", error);
@@ -219,6 +221,32 @@ const deleteUser = async (id) => {
       );
     }
   };
+
+  // Menu by id
+const getMenuByid = async(id) => {
+const token = localStorage.getItem("token");
+
+    try {
+      const api = await axios.get(`${url}/menuItem/get/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+     
+       if (api.data.success === true) {
+          await getMenuItem();
+          await getUserCart();
+        }
+        setGetMenuDataById(api.data.product)
+        console.log("Your Prodcut is here...", getMenuDataById);
+      return api.data;
+    } catch (error) {
+      console.error(
+        "Add to cart failed:",
+        error?.response?.data?.message || error.message
+      );
+    }
+}
 
   // Edit menuitem
 
@@ -450,6 +478,7 @@ const getAllUsers = async () => {
     getMenuItem();
     getCatgory();
     getAllUsers();
+    //getMenuByid("686a65e7b225e55facefb6a8");
     const token = localStorage.getItem("token");
     if (token) {
       getUserCart();
@@ -481,7 +510,8 @@ const getAllUsers = async () => {
         deletMenuItem,
         updateMenuItem, 
         user, setUser, 
-        getAllUsers, updateUser, deleteUser
+        getAllUsers, updateUser, deleteUser, getMenuByid,
+  getMenuDataById
       }}
     >
       {children}
