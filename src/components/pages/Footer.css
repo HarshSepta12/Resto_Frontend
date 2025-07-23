@@ -1,3 +1,7 @@
+.footer{
+     position: relative;
+    top: 4rem;
+}
 .company-heading {
   font-family: "Pacifico", sans-serif;
   color: #fea116;

@@ -22,7 +22,7 @@ const AdminLogin = () => {
     const { email, password } = formData;
 
     const result = await Login(email, password);
-    console.log("User Data is here", result);
+   // console.log("User Data is here", result);
     
     if (result?.success && result?.user?.role == 'admin') {
       setFormData({ email: "", password: "" });

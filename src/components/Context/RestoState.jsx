@@ -7,10 +7,10 @@ import "react-toastify/dist/ReactToastify.css";
 
 const RestoProvider = ({ children }) => {
   //debugger time
-// const url = "http://localhost:1200/api";
+ const url = "http://localhost:1200/api";
 
   //deployment time
-    const url = "https://resto-api-3f6g.onrender.com/api";
+   // const url = "https://resto-api-3f6g.onrender.com/api";
 
   const [getMenuData, setGetMenuData] = useState("");
   const [getMenuDataById, setGetMenuDataById] = useState("");
@@ -70,7 +70,7 @@ const RestoProvider = ({ children }) => {
       }
       return api.data;
     } catch (error) {
-      console.error("Something Went Wrong", error.message);
+      console.log("Something Went Wrong", error.message);
     }
   };
 
@@ -106,7 +106,7 @@ const RestoProvider = ({ children }) => {
         });
       }
       setHaveToken(true);
-      console.log(api.data);
+     // console.log(api.data);
       if (api.data.user.role == "admin") {
         localStorage.setItem("token", api.data.token);
         localStorage.setItem("isAdmin", "true");
@@ -116,7 +116,7 @@ const RestoProvider = ({ children }) => {
       await getUserCart();
       return api.data;
     } catch (error) {
-      console.error("Login failed", error);
+      console.log("Login failed", error);
 
       return {
         success: false,
@@ -144,7 +144,7 @@ const updateUser = async (id, updatedData) => {
     }
   } catch (err) {
     toast.error("Failed to update user");
-    console.error(err);
+    console.log(err);
   }
 };
 
@@ -164,7 +164,7 @@ const deleteUser = async (id) => {
     }
   } catch (err) {
     toast.error("Delete failed");
-    console.error(err);
+    console.log(err);
   }
 };
 
@@ -182,7 +182,7 @@ const deleteUser = async (id) => {
     // console.log("Your Product is here...", getMenuData);
       return api.data.getAllMenuItem;
     } catch (error) {
-      console.error("Menu Not Found", error);
+      console.log("Menu Not Found", error);
     }
   };
 
@@ -215,7 +215,7 @@ const deleteUser = async (id) => {
       }
       return api.data;
     } catch (error) {
-      console.error(
+      console.log(
         "Add to cart failed:",
         error?.response?.data?.message || error.message
       );
@@ -242,7 +242,7 @@ console.log(id);
         setGetMenuDataById(api.data.product);
       return api.data.product;
     } catch (error) {
-      console.error(
+      console.log(
         "Add to cart failed:",
         error?.response?.data?.message || error.message
       );
@@ -267,7 +267,7 @@ const updateMenuItem = async (id, updatedData) => {
     }
   } catch (err) {
     toast.error("Update failed");
-    console.error(err);
+    console.log(err);
   }
 };
 
@@ -317,7 +317,7 @@ const updateMenuItem = async (id, updatedData) => {
       }
       return api.data;
     } catch (error) {
-      console.error(error.message);
+      console.log(error.message);
     }
   };
 
@@ -332,7 +332,7 @@ const updateMenuItem = async (id, updatedData) => {
       setcategory(api.data.getCategory);
       return api.data.getCategory;
     } catch (error) {
-      console.error("Category Not Found", error);
+      console.log("Category Not Found", error);
       return [];
     }
   };
@@ -368,7 +368,7 @@ const updateMenuItem = async (id, updatedData) => {
       }
       return api.data;
     } catch (error) {
-      console.error(
+      console.log(
         "Add to cart failed:",
         error?.response?.data?.message || error.message
       );
@@ -411,7 +411,7 @@ const updateMenuItem = async (id, updatedData) => {
       console.log(api.data);
       return api.data;
     } catch (error) {
-      console.error(
+      console.log(
         "Decrease item from cart failed:",
         error?.response?.data?.message || error.message
       );
@@ -447,7 +447,7 @@ const updateMenuItem = async (id, updatedData) => {
         //console.log("🛒 Cart fetched:", itemMap);
       }
     } catch (err) {
-      console.error("❌ Failed to fetch cart items", err);
+      console.log("❌ Failed to fetch cart items", err);
     }
   };
 
@@ -455,7 +455,8 @@ const updateMenuItem = async (id, updatedData) => {
    // get all user
 const getAllUsers = async () => {
   const token = localStorage.getItem("token");
-  try {
+  if(token){
+try {
     const api = await axios.get(`${url}/user/getAllUser`, {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -467,8 +468,10 @@ const getAllUsers = async () => {
       setUser(api.data.AllUser); // ✅ correct setter
     }
   } catch (error) {
-    console.error("❌ Failed to fetch all users", error);
+    console.log("❌ Failed to fetch all users", error);
   }
+  }
+  
 };
 
 
