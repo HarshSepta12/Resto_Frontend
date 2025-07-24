@@ -7,10 +7,10 @@ import "react-toastify/dist/ReactToastify.css";
 
 const RestoProvider = ({ children }) => {
   //debugger time
- const url = "http://localhost:1200/api";
+ // const url = "http://localhost:1200/api";
 
   //deployment time
-   // const url = "https://resto-api-3f6g.onrender.com/api";
+   const url = "https://resto-api-3f6g.onrender.com/api";
 
   const [getMenuData, setGetMenuData] = useState("");
   const [getMenuDataById, setGetMenuDataById] = useState("");
@@ -22,7 +22,7 @@ const RestoProvider = ({ children }) => {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    const isAdmin = localStorage.getItem("isAdmin"); 
+    const isAdmin = localStorage.getItem("isAdmin");
 
     if (token) {
       setHaveToken(true);
@@ -106,7 +106,7 @@ const RestoProvider = ({ children }) => {
         });
       }
       setHaveToken(true);
-     // console.log(api.data);
+      // console.log(api.data);
       if (api.data.user.role == "admin") {
         localStorage.setItem("token", api.data.token);
         localStorage.setItem("isAdmin", "true");
@@ -125,48 +125,47 @@ const RestoProvider = ({ children }) => {
     }
   };
 
-
   //update user
 
-const updateUser = async (id, updatedData) => {
-  const token = localStorage.getItem("token");
-  try {
-    const res = await axios.put(`${url}/user/updateUser/${id}`, updatedData, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-    });
+  const updateUser = async (id, updatedData) => {
+    const token = localStorage.getItem("token");
+    try {
+      const res = await axios.put(`${url}/user/updateUser/${id}`, updatedData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
 
-    if (res.data.success) {
-      toast.success("User updated successfully");
-      getAllUsers(); // refresh list
+      if (res.data.success) {
+        toast.success("User updated successfully");
+        getAllUsers(); // refresh list
+      }
+    } catch (err) {
+      toast.error("Failed to update user");
+      console.log(err);
     }
-  } catch (err) {
-    toast.error("Failed to update user");
-    console.log(err);
-  }
-};
+  };
 
-// Delete user
-const deleteUser = async (id) => {
-  const token = localStorage.getItem("token");
-  try {
-    const res = await axios.delete(`${url}/user/deleteUser/${id}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+  // Delete user
+  const deleteUser = async (id) => {
+    const token = localStorage.getItem("token");
+    try {
+      const res = await axios.delete(`${url}/user/deleteUser/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
-    if (res.data.success) {
-      toast.success("User deleted");
-      getAllUsers(); // refresh list
+      if (res.data.success) {
+        toast.success("User deleted");
+        getAllUsers(); // refresh list
+      }
+    } catch (err) {
+      toast.error("Delete failed");
+      console.log(err);
     }
-  } catch (err) {
-    toast.error("Delete failed");
-    console.log(err);
-  }
-};
+  };
 
   //get menu item
   const getMenuItem = async () => {
@@ -176,10 +175,9 @@ const deleteUser = async (id) => {
           "Content-Type": "application/json",
         },
       });
-    
 
       setGetMenuData(api.data.getAllMenuItem);
-    // console.log("Your Product is here...", getMenuData);
+      // console.log("Your Product is here...", getMenuData);
       return api.data.getAllMenuItem;
     } catch (error) {
       console.log("Menu Not Found", error);
@@ -223,9 +221,9 @@ const deleteUser = async (id) => {
   };
 
   // Menu by id
-const getMenuByid = async(id) => {
-const token = localStorage.getItem("token");
-console.log(id);
+  const getMenuByid = async (id) => {
+    const token = localStorage.getItem("token");
+    console.log(id);
 
     try {
       const api = await axios.get(`${url}/menuItem/get/${id}`, {
@@ -233,13 +231,13 @@ console.log(id);
           Authorization: `Bearer ${token}`,
         },
       });
-     
-       if (api.data.success === true) {
-          await getMenuItem();
-          await getUserCart();
-        }
-        console.log("Your Prodcut is here...", api.data);
-        setGetMenuDataById(api.data.product);
+
+      if (api.data.success === true) {
+        await getMenuItem();
+        await getUserCart();
+      }
+      console.log("Your Prodcut is here...", api.data);
+      setGetMenuDataById(api.data.product);
       return api.data.product;
     } catch (error) {
       console.log(
@@ -247,29 +245,29 @@ console.log(id);
         error?.response?.data?.message || error.message
       );
     }
-}
+  };
 
   // Edit menuitem
 
-const updateMenuItem = async (id, updatedData) => {
-  const token = localStorage.getItem("token");
-  try {
-    const res = await axios.put(`${url}/menuItem/update/${id}`, updatedData, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-    });
+  const updateMenuItem = async (id, updatedData) => {
+    const token = localStorage.getItem("token");
+    try {
+      const res = await axios.put(`${url}/menuItem/update/${id}`, updatedData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
 
-    if (res.data.success) {
-      toast.success("Item updated successfully");
-      await getMenuItem(); 
+      if (res.data.success) {
+        toast.success("Item updated successfully");
+        await getMenuItem();
+      }
+    } catch (err) {
+      toast.error("Update failed");
+      console.log(err);
     }
-  } catch (err) {
-    toast.error("Update failed");
-    console.log(err);
-  }
-};
+  };
 
   // post menuitem
   const postMenuItem = async (
@@ -422,10 +420,10 @@ const updateMenuItem = async (id, updatedData) => {
   const getUserCart = async () => {
     const token = localStorage.getItem("token");
     if (!token) {
-     // console.warn("🚫 No token found for getUserCart");
+      // console.warn("🚫 No token found for getUserCart");
       return;
     }
-   // console.log(token);
+    // console.log(token);
 
     try {
       const res = await axios.get(`${url}/Addtocart/getCart`, {
@@ -451,30 +449,57 @@ const updateMenuItem = async (id, updatedData) => {
     }
   };
 
+  // get all user
+  const getAllUsers = async () => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      try {
+        const api = await axios.get(`${url}/user/getAllUser`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        });
 
-   // get all user
-const getAllUsers = async () => {
-  const token = localStorage.getItem("token");
-  if(token){
-try {
-    const api = await axios.get(`${url}/user/getAllUser`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-    });
-
-    if (api.data.success) {
-      setUser(api.data.AllUser); // ✅ correct setter
+        if (api.data.success) {
+          setUser(api.data.AllUser); // ✅ correct setter
+        }
+      } catch (error) {
+        console.log("❌ Failed to fetch all users", error);
+      }
     }
-  } catch (error) {
-    console.log("❌ Failed to fetch all users", error);
+  };
+
+
+  // Book Table
+const BookTable = async (name, email, time, guests, specialRequest) => {
+  const token = localStorage.getItem("token");
+
+  try {
+    const api = await axios.post(
+      `${url}/booking/BookTable`,
+      { name, email, time, guests, specialRequest },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    if (api.data.success === true) {
+      toast("Table Booking Successfully", {
+        position: "top-right",
+        autoClose: 1000,
+        theme: "light",
+      });
+    }
+    return api.data;
+  } catch (err) {
+    toast.error("Booking failed: " + err.response?.data?.message || err.message);
+    console.error("Booking error:", err);
   }
-  }
-  
 };
-
-
 
 
 
@@ -512,10 +537,15 @@ try {
         getUserCart,
         itemDecreaseFromCart,
         deletMenuItem,
-        updateMenuItem, 
-        user, setUser, 
-        getAllUsers, updateUser, deleteUser, getMenuByid,
-  getMenuDataById
+        updateMenuItem,
+        user,
+        setUser,
+        getAllUsers,
+        updateUser,
+        deleteUser,
+        getMenuByid,
+        getMenuDataById,
+        BookTable
       }}
     >
       {children}
