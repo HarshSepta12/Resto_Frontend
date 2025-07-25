@@ -27,7 +27,7 @@ const Register = () => {
 
     if (result && result.success) {
       setFormdata({ username: "", email: "", password: "" });
-      navigate("/adminLogin");
+      navigate("/login");
     }
   };
 
