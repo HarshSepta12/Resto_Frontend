@@ -6,7 +6,7 @@
   top: 0;
   z-index: 1000;
 }
-/* Harsh Septa Sirvi  */
+
 
 .navbarInner {
   display: flex;
@@ -53,6 +53,7 @@
   transition: 0.3s;
 }
 
+
 .navLinks a:hover {
   color: #ffc107;
 }
@@ -82,6 +83,9 @@
   color: #ffc107;
 }
 
+.cartIcons{
+  font-size: 26px;
+}
 /* Responsive styles */
 @media (max-width: 768px) {
   .hamburger {

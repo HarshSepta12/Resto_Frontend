@@ -12,11 +12,12 @@ const Menu = () => {
     itemQuantities,
     getUserCart,
     itemDecreaseFromCart,
-    getMenuByid
+    getMenuByid,
+    itemAdd
   } = useContext(RestoContext);
   const [activeCategory, setActiveCategory] = useState("all");
   //const [itemQuantities, setitemQuantities] = useState({});
-  const { itemAdd } = useContext(RestoContext);
+
 const navigate = useNavigate();
   // const user = JSON.parse(localStorage.getItem("user"));
   // const userId = user?._id || user.id;

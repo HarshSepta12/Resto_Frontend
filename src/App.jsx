@@ -19,8 +19,11 @@ import PublicLayout from "./Layout/PublicLayout";
 import Booktable from "./components/pages/Booktable";
 import Users from "./components/pages/User";
 import ProductSpecificPage from "./components/pages/ProductSpecificPage.jsx";
+import Cart from "./components/pages/Cart.jsx";
+import RestoContext from "./components/Context/RestoContaxt.jsx";
 
 const App = () => {
+
   return (
     <BrowserRouter>
       <ToastContainer />
@@ -34,6 +37,7 @@ const App = () => {
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<AdminLogin />} />
           <Route path="/booktable" element={<Booktable />} />
+          <Route path="/cart" element={<Cart />} />
           <Route
             path="/productspecificpage"
             element={<ProductSpecificPage />}

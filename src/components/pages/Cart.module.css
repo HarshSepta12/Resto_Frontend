@@ -1,0 +1,39 @@
+.cartTitle {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #2c3e50;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.cartCard {
+  border-radius: 16px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-color: white;
+}
+
+
+.cartCard:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  background-color: white !important; 
+}
+
+
+.cartImg {
+  height: 200px;
+  object-fit: cover;
+  border-bottom: 1px solid #ddd;
+}
+
+.cartPrice {
+  font-size: 1.1rem;
+  color: #000000 !important;
+}
+
+.cartTotal {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #27ae60;
+}

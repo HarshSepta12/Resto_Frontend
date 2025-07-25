@@ -1,4 +1,4 @@
-// ThemeProvider.js
+// Updated ThemeProvider.js (Context)
 import React, { useEffect, useState } from "react";
 import RestoContext from "./RestoContaxt";
 import axios from "axios";
@@ -18,7 +18,8 @@ const RestoProvider = ({ children }) => {
   const [haveToken, setHaveToken] = useState(false);
   const [admin, setAdmin] = useState(false);
   const [user, setUser] = useState([]);
-  const [itemQuantities, setItemQuantities] = useState({});
+  const [itemQuantities, setItemQuantities] = useState([]);
+  const [bookings, setBookings] = useState([]); 
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -41,7 +42,30 @@ const RestoProvider = ({ children }) => {
     setAdmin(false);
   };
 
-  //Resgister Logic
+  // Phone number validation function
+  const validatePhoneNumber = (phone) => {
+    const digitsOnly = phone.replace(/\D/g, '');
+    if (digitsOnly.length < 10 || digitsOnly.length > 15) {
+      return false;
+    }
+    const phoneRegex = /^\+?[\d\s\-\(\)]{10,}$/;
+    return phoneRegex.test(phone);
+  };
+
+  // Format phone number consistently
+  const formatPhoneNumber = (phone) => {
+    let cleaned = phone.replace(/\D/g, '');
+    if (cleaned.length === 10) {
+      cleaned = '+91' + cleaned; // For Indian numbers
+    } else if (!phone.startsWith('+')) {
+      cleaned = '+' + cleaned;
+    } else {
+      cleaned = phone;
+    }
+    return cleaned;
+  };
+
+  //Register Logic
   const Register = async (username, email, password) => {
     try {
       const api = await axios.post(
@@ -126,7 +150,6 @@ const RestoProvider = ({ children }) => {
   };
 
   //update user
-
   const updateUser = async (id, updatedData) => {
     const token = localStorage.getItem("token");
     try {
@@ -248,7 +271,6 @@ const RestoProvider = ({ children }) => {
   };
 
   // Edit menuitem
-
   const updateMenuItem = async (id, updatedData) => {
     const token = localStorage.getItem("token");
     try {
@@ -374,7 +396,6 @@ const RestoProvider = ({ children }) => {
   };
 
   //decreseCart item
-
   const itemDecreaseFromCart = async (menuItemId) => {
     const token = localStorage.getItem("token");
     console.log("Token: ", localStorage.getItem("token"));
@@ -417,37 +438,38 @@ const RestoProvider = ({ children }) => {
   };
 
   // Get UserCart
-  const getUserCart = async () => {
-    const token = localStorage.getItem("token");
-    if (!token) {
-      // console.warn("🚫 No token found for getUserCart");
-      return;
-    }
-    // console.log(token);
+const getUserCart = async () => {
+  const token = localStorage.getItem("token");
+  if (!token) return;
 
-    try {
-      const res = await axios.get(`${url}/Addtocart/getCart`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+  try {
+    const res = await axios.get(`${url}/Addtocart/getCart`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (res.data.success) {
+      const itemMap = {};
+      res.data.data.forEach((item) => {
+        itemMap[item.menuItemId] = {
+          quantity: item.quantity,
+          price: item.price,
+          name: item.name,
+          imageUrl: item.imageUrl,
+          menuItemId: item.menuItemId,
+        };
       });
 
-      if (res.data.success) {
-        const itemMap = {};
-        res.data.data.forEach((item) => {
-          itemMap[item.menuItemId] = {
-            quantity: item.quantity,
-            price: item.price,
-          };
-        });
-
-        setItemQuantities(itemMap);
-        //console.log("🛒 Cart fetched:", itemMap);
-      }
-    } catch (err) {
-      console.log("❌ Failed to fetch cart items", err);
+      setItemQuantities(itemMap); // ✅ store as object
+      return res.data.data;
     }
-  };
+  } catch (err) {
+    console.log("❌ Failed to fetch cart items", err);
+  }
+};
+
+
 
   // get all user
   const getAllUsers = async () => {
@@ -470,36 +492,134 @@ const RestoProvider = ({ children }) => {
     }
   };
 
+  // Updated Book Table function with phone support
+  const BookTable = async (name, email, phone, time, guests, specialRequest) => {
+    const token = localStorage.getItem("token");
 
-  // Book Table
-const BookTable = async (name, email, time, guests, specialRequest) => {
-  const token = localStorage.getItem("token");
-
-  try {
-    const api = await axios.post(
-      `${url}/booking/BookTable`,
-      { name, email, time, guests, specialRequest },
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-
-    if (api.data.success === true) {
-      toast("Table Booking Successfully", {
-        position: "top-right",
-        autoClose: 1000,
-        theme: "light",
-      });
+    // Validate phone number
+    if (!validatePhoneNumber(phone)) {
+      toast.error("Please enter a valid phone number (10-15 digits)");
+      return { success: false, message: "Invalid phone number" };
     }
-    return api.data;
-  } catch (err) {
-    toast.error("Booking failed: " + err.response?.data?.message || err.message);
-    console.error("Booking error:", err);
+
+    // Format phone number
+    const formattedPhone = formatPhoneNumber(phone);
+
+    try {
+      const api = await axios.post(
+        `${url}/booking/BookTable`,
+        { name, email, phone: formattedPhone, time, guests, specialRequest },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (api.data.success === true) {
+        toast.success("🎉 Table Booking Successful! Check your email and SMS for confirmation.", {
+          position: "top-right",
+          autoClose: 3000,
+          theme: "light",
+        });
+      }
+      return api.data;
+    } catch (err) {
+      const errorMessage = err.response?.data?.message || err.message || "Booking failed";
+      toast.error("Booking failed: " + errorMessage);
+      console.error("Booking error:", err);
+      return { success: false, message: errorMessage };
+    }
+  };
+
+  // // Get all bookings (for admin)
+  // const getAllBookings = async () => {
+  //   const token = localStorage.getItem("token");
+  //   if (!token) return;
+
+  //   try {
+  //     const api = await axios.get(`${url}/booking/getAllBookings`, {
+  //       headers: {
+  //         Authorization: `Bearer ${token}`,
+  //         "Content-Type": "application/json",
+  //       },
+  //     });
+
+  //     if (api.data.success) {
+  //       setBookings(api.data.bookings);
+  //     }
+  //     return api.data.bookings;
+  //   } catch (error) {
+  //     console.error("Failed to fetch bookings:", error);
+  //     return [];
+  //   }
+  // };
+
+  // // Update booking status (for admin)
+  // const updateBookingStatus = async (bookingId, status) => {
+  //   const token = localStorage.getItem("token");
+  //   if (!token) return;
+
+  //   try {
+  //     const api = await axios.put(
+  //       `${url}/booking/updateStatus/${bookingId}`,
+  //       { status },
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${token}`,
+  //           "Content-Type": "application/json",
+  //         },
+  //       }
+  //     );
+
+  //     if (api.data.success) {
+  //       toast.success(`Booking ${status} and SMS sent to customer`);
+  //       await getAllBookings(); // Refresh bookings list
+  //     }
+  //     return api.data;
+  //   } catch (error) {
+  //     console.error("Failed to update booking status:", error);
+  //     toast.error("Failed to update booking status");
+  //   }
+  // };
+
+
+
+const handlePayment = async (totalAmount) => {
+  try {
+    const { data } = await axios.post('http://localhost:1200/api/payment/checkout', {
+      amount: totalAmount,
+    });
+
+    const options = {
+      key: "rzp_test_Y3i5kmoyXlPQs6", 
+      amount: data.order.amount,
+      currency: "INR",
+      name: "Shree Aaiji Restourant",
+      description: "Order Payment",
+      order_id: data.order.id,
+      handler: function (response) {
+        alert("Payment successful! Razorpay Payment ID: " + response.razorpay_payment_id);
+      },
+      prefill: {
+        name: "Harsh Septa",
+        email: "harshsepta49@gmail.com",
+        contact: "7047916634",
+      },
+      theme: {
+        color: "#ecdd07ff",
+      },
+    };
+
+    const razor = new window.Razorpay(options);
+    razor.open();
+  } catch (error) {
+    console.error("Error during handlePayment:", error);
   }
 };
+
+
 
 
 
@@ -511,8 +631,11 @@ const BookTable = async (name, email, time, guests, specialRequest) => {
     const token = localStorage.getItem("token");
     if (token) {
       getUserCart();
+      if (admin) {
+        //getAllBookings(); // Load bookings for admin
+      }
     }
-  }, [haveToken]);
+  }, [haveToken, admin]);
 
   // getMenuItem();
   return (
@@ -545,7 +668,13 @@ const BookTable = async (name, email, time, guests, specialRequest) => {
         deleteUser,
         getMenuByid,
         getMenuDataById,
-        BookTable
+        BookTable,
+        validatePhoneNumber,
+        formatPhoneNumber,
+        bookings,
+        handlePayment
+      //  getAllBookings,
+       // updateBookingStatus
       }}
     >
       {children}
