@@ -6,12 +6,14 @@ import { toast, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const RestoProvider = ({ children }) => {
- //debugger time 
- // // const url = "http://localhost:1200/api";
+  //debugger time
+  const url = "http://localhost:1200/api";
 
- //deployment time
- const url = "https://resto-api-3f6g.onrender.com/api";
-  const [getMenuData, setGetMenuData] = useState([]);
+  //deployment time
+//  const url = "https://resto-api-3f6g.onrender.com/api";
+
+  const [getMenuData, setGetMenuData] = useState("");
+  const [getMenuDataById, setGetMenuDataById] = useState("");
   const [category, setcategory] = useState([]);
   const [haveToken, setHaveToken] = useState(false);
   const [admin, setAdmin] = useState(false);
@@ -463,13 +465,164 @@ const getUserCart = async () => {
       return res.data.data;
     }
   } catch (err) {
-    console.error("❌ Failed to fetch cart items", err);
+    console.log("❌ Failed to fetch cart items", err);
   }
 };
 
 
 
-  // Optional: preload on mount
+  // get all user
+  const getAllUsers = async () => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      try {
+        const api = await axios.get(`${url}/user/getAllUser`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        });
+
+        if (api.data.success) {
+          setUser(api.data.AllUser);
+        }
+      } catch (error) {
+        console.log("❌ Failed to fetch all users", error);
+      }
+    }
+  };
+
+  // Updated Book Table function with phone support
+  const BookTable = async (name, email, phone, time, guests, specialRequest) => {
+    const token = localStorage.getItem("token");
+
+    // Validate phone number
+    if (!validatePhoneNumber(phone)) {
+      toast.error("Please enter a valid phone number (10-15 digits)");
+      return { success: false, message: "Invalid phone number" };
+    }
+
+    // Format phone number
+    const formattedPhone = formatPhoneNumber(phone);
+
+    try {
+      const api = await axios.post(
+        `${url}/booking/BookTable`,
+        { name, email, phone: formattedPhone, time, guests, specialRequest },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (api.data.success === true) {
+        toast.success("🎉 Table Booking Successful! Check your email and SMS for confirmation.", {
+          position: "top-right",
+          autoClose: 3000,
+          theme: "light",
+        });
+      }
+      return api.data;
+    } catch (err) {
+      const errorMessage = err.response?.data?.message || err.message || "Booking failed";
+      toast.error("Booking failed: " + errorMessage);
+      console.error("Booking error:", err);
+      return { success: false, message: errorMessage };
+    }
+  };
+
+  // // Get all bookings (for admin)
+  // const getAllBookings = async () => {
+  //   const token = localStorage.getItem("token");
+  //   if (!token) return;
+
+  //   try {
+  //     const api = await axios.get(`${url}/booking/getAllBookings`, {
+  //       headers: {
+  //         Authorization: `Bearer ${token}`,
+  //         "Content-Type": "application/json",
+  //       },
+  //     });
+
+  //     if (api.data.success) {
+  //       setBookings(api.data.bookings);
+  //     }
+  //     return api.data.bookings;
+  //   } catch (error) {
+  //     console.error("Failed to fetch bookings:", error);
+  //     return [];
+  //   }
+  // };
+
+  // // Update booking status (for admin)
+  // const updateBookingStatus = async (bookingId, status) => {
+  //   const token = localStorage.getItem("token");
+  //   if (!token) return;
+
+  //   try {
+  //     const api = await axios.put(
+  //       `${url}/booking/updateStatus/${bookingId}`,
+  //       { status },
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${token}`,
+  //           "Content-Type": "application/json",
+  //         },
+  //       }
+  //     );
+
+  //     if (api.data.success) {
+  //       toast.success(`Booking ${status} and SMS sent to customer`);
+  //       await getAllBookings(); // Refresh bookings list
+  //     }
+  //     return api.data;
+  //   } catch (error) {
+  //     console.error("Failed to update booking status:", error);
+  //     toast.error("Failed to update booking status");
+  //   }
+  // };
+
+
+
+const handlePayment = async (totalAmount) => {
+  try {
+    const { data } = await axios.post(`${url}/payment/checkout`, {
+      amount: totalAmount,
+    });
+
+    const options = {
+      key: "rzp_test_Y3i5kmoyXlPQs6", 
+      amount: data.order.amount,
+      currency: "INR",
+      name: "Shree Aaiji Restourant",
+      description: "Order Payment",
+      order_id: data.order.id,
+      handler: function (response) {
+        alert("Payment successful! Razorpay Payment ID: " + response.razorpay_payment_id);
+      },
+      prefill: {
+        name: "Harsh Septa",
+        email: "harshsepta49@gmail.com",
+        contact: "7047916634",
+      },
+      theme: {
+        color: "#ecdd07ff",
+      },
+    };
+
+    const razor = new window.Razorpay(options);
+    razor.open();
+  } catch (error) {
+    console.error("Error during handlePayment:", error);
+  }
+};
+
+
+
+
+
   useEffect(() => {
     getMenuItem();
     getCatgory();
