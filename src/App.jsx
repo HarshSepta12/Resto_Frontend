@@ -21,6 +21,7 @@ import Users from "./components/pages/User";
 import ProductSpecificPage from "./components/pages/ProductSpecificPage.jsx";
 import Cart from "./components/pages/Cart.jsx";
 import RestoContext from "./components/Context/RestoContaxt.jsx";
+import Checkout from "./components/pages/Checkout.jsx";
 
 const App = () => {
 
@@ -38,6 +39,7 @@ const App = () => {
           <Route path="/login" element={<AdminLogin />} />
           <Route path="/booktable" element={<Booktable />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/checkout" element={<Checkout />} />
           <Route
             path="/productspecificpage"
             element={<ProductSpecificPage />}

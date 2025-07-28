@@ -1,10 +1,13 @@
 import React, { useContext } from 'react';
 import RestoContext from '../Context/RestoContaxt';
 import styles from './Cart.module.css';
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
   const { itemQuantities, getMenuData, handlePayment } = useContext(RestoContext);
 
+
+const navigate = useNavigate();
   const cartItems = Object.values(itemQuantities || {});
   const cartTotalAmount = cartItems.reduce((acc, item) => acc + (item.price * item.quantity), 0); // ✅ FIXED
 
@@ -33,7 +36,7 @@ const Cart = () => {
                     </p>
                     <p className="card-text text-dark">Quantity: {item.quantity}</p>
                     <p className={`card-text ${styles.cartTotal}`}>
-                      Total: ₹{item.price * item.quantity}
+                      Total: ₹{item.price}
                     </p>
                   </div>
                 </div>
@@ -46,9 +49,9 @@ const Cart = () => {
 
         <div className="text-center mt-4">
           <h4>Total Amount: ₹{cartTotalAmount}</h4>
-          <button className="btn btn-primary mt-2" onClick={() => handlePayment(cartTotalAmount)}>
-            Pay Now
-          </button>
+          <button className="btn btn-primary mt-2" onClick={() => navigate('/checkout')}>
+  Proceed to Checkout
+</button>
         </div>
       </div>
     </div>

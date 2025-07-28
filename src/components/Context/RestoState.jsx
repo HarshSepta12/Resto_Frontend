@@ -78,7 +78,7 @@ const RestoProvider = ({ children }) => {
         }
       );
 
-      console.log(api.data);
+     // console.log(api.data);
       if (api.data.success == true) {
         toast("Register Successfull", {
           position: "top-right",
@@ -111,9 +111,12 @@ const RestoProvider = ({ children }) => {
         }
       );
 
+      console.log(api.data);
+      
       if (api.data.token) {
         localStorage.setItem("token", api.data.token);
         localStorage.setItem("user", JSON.stringify(api.data.user));
+        setHaveToken(true);
       }
 
       if (api.data.success === true) {
@@ -129,7 +132,7 @@ const RestoProvider = ({ children }) => {
           transition: Bounce,
         });
       }
-      setHaveToken(true);
+   
       // console.log(api.data);
       if (api.data.user.role == "admin") {
         localStorage.setItem("token", api.data.token);
@@ -291,6 +294,7 @@ const RestoProvider = ({ children }) => {
     }
   };
 
+
   // post menuitem
   const postMenuItem = async (
     name,
@@ -340,6 +344,7 @@ const RestoProvider = ({ children }) => {
       console.log(error.message);
     }
   };
+
 
   // get Category
   const getCatgory = async () => {
