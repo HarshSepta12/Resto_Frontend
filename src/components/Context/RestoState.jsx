@@ -5,8 +5,8 @@ import { toast, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const RestoProvider = ({ children }) => {
-  // url = "http://localhost:1200/api";
-  const url = "https://resto-api-3f6g.onrender.com/api";
+  const  url = "http://localhost:1200/api";
+  //const url = "https://resto-api-3f6g.onrender.com/api";
 
   const [getMenuData, setGetMenuData] = useState("");
   const [getMenuDataById, setGetMenuDataById] = useState("");
@@ -392,6 +392,38 @@ const RestoProvider = ({ children }) => {
     }
   };
 
+
+// Accept one object argument
+const addAddress = async (fullAddress, city, pincode) => {
+  const token = localStorage.getItem("token");
+
+  console.log("Sending to backend:", { fullAddress, city, pincode });
+
+  try {
+    const res = await axios.post(`${url}/address/addingAddress`, {
+      fullAddress,
+      city,
+      pincode: Number(pincode),  // 🔥 Ensure number
+    }, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+
+    console.log("Address saved:", res.data);
+    return res.data;
+
+  } catch (err) {
+    console.error("Error Adding user address:", err);
+    return null;
+  }
+};
+
+
+
+
+
+
   useEffect(() => {
     getMenuItem();
     getCatgory();
@@ -440,6 +472,8 @@ const RestoProvider = ({ children }) => {
         bookings,
         handlePayment,
         getMyBooking,
+        addAddress,
+        
       }}
     >
       {children}

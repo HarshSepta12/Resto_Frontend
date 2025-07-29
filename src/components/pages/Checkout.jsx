@@ -1,19 +1,24 @@
-import React, { useContext, useState, useEffect } from 'react';
-import RestoContext from '../Context/RestoContaxt';
-import styles from './Checkout.module.css'; // CSS module import
+import React, { useContext, useState, useEffect } from "react";
+import RestoContext from "../Context/RestoContaxt";
+import styles from "./Checkout.module.css"; // CSS module import
 
 const Checkout = () => {
-  const { itemQuantities, handlePayment, getMyBooking } = useContext(RestoContext);
+  const { itemQuantities, handlePayment, getMyBooking, addAddress,  clearCart,
+    clearBooking } =
+    useContext(RestoContext);
 
-  const [selectedTab, setSelectedTab] = useState('table'); // "table" or "delivery"
-  const [address, setAddress] = useState('');
-  const [city, setCity] = useState('');
-  const [pincode, setPincode] = useState('');
+  const [selectedTab, setSelectedTab] = useState("table"); // "table" or "delivery"
+  const [address, setAddress] = useState();
+  const [city, setCity] = useState("");
+  const [pincode, setPincode] = useState("");
   const [tableBooking, setTableBooking] = useState([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const cartItems = Object.values(itemQuantities || {});
-  const totalAmount = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
+  const totalAmount = cartItems.reduce(
+    (acc, item) => acc + item.price * item.quantity,
+    0
+  );
 
   useEffect(() => {
     const fetchBooking = async () => {
@@ -23,8 +28,13 @@ const Checkout = () => {
     fetchBooking();
   }, []);
 
-  const handlePlaceOrder = () => {
-    if (selectedTab === 'delivery' && address.trim() !== '') {
+  const handlePlaceOrder = async () => {
+    if (selectedTab === "delivery") {
+      if (!address?.trim()) {
+        alert("Please enter delivery address.");
+        return;
+      }
+
       if (tableBooking.length > 0) {
         const confirmSwitch = window.confirm(
           "You already have a table booking.\nDo you want to cancel it and proceed with delivery?"
@@ -32,13 +42,27 @@ const Checkout = () => {
         if (!confirmSwitch) return;
         setTableBooking([]);
       }
+
+      try {
+        setIsSubmitting(true);
+       await addAddress(address, city, pincode);
+
+
+        handlePayment(totalAmount);
+      } catch (error) {
+        alert("Failed to save address. Please try again.");
+      } finally {
+        setIsSubmitting(false);
+      }
+    } else {
+      // Table Booking case
+      handlePayment(totalAmount);
     }
-    handlePayment(totalAmount);
   };
 
   const handleGetCurrentLocation = () => {
     if (!navigator.geolocation) {
-      alert('Geolocation not supported');
+      alert("Geolocation not supported");
       return;
     }
 
@@ -51,16 +75,16 @@ const Checkout = () => {
         );
         const data = await res.json();
 
-        const place = data.display_name || '';
+        const place = data.display_name || "";
         const cityName =
-          data.address.city || data.address.town || data.address.village || '';
-        const pin = data.address.postcode || '';
+          data.address.city || data.address.town || data.address.village || "";
+        const pin = data.address.postcode || "";
 
         setAddress(place);
         setCity(cityName);
         setPincode(pin);
       } catch (err) {
-        alert('Failed to fetch location details.');
+        alert("Failed to fetch location details.");
       }
     });
   };
@@ -73,17 +97,17 @@ const Checkout = () => {
       <div className={styles.tabButtons}>
         <button
           className={`${styles.tabButton} ${
-            selectedTab === 'table' ? styles.tabButtonActive : ''
+            selectedTab === "table" ? styles.tabButtonActive : ""
           }`}
-          onClick={() => setSelectedTab('table')}
+          onClick={() => setSelectedTab("table")}
         >
-         <span style={{color: "maroon"}}>🍽 </span> Table Booking
+          <span style={{ color: "maroon" }}>🍽 </span> Table Booking
         </button>
         <button
           className={`${styles.tabButton} ${
-            selectedTab === 'delivery' ? styles.tabButtonActive : ''
+            selectedTab === "delivery" ? styles.tabButtonActive : ""
           }`}
-          onClick={() => setSelectedTab('delivery')}
+          onClick={() => setSelectedTab("delivery")}
         >
           🚚 Deliver to My Address
         </button>
@@ -105,27 +129,36 @@ const Checkout = () => {
       )}
 
       {/* Table Booking Tab */}
-      {selectedTab === 'table' && tableBooking.length > 0 && (
+      {selectedTab === "table" && tableBooking.length > 0 && (
         <div className={styles.alert}>
           <h5>✅ Table Booked</h5>
           <p>
-            <strong>Name:</strong> {tableBooking[0].name}<br />
-            <strong>Email:</strong> {tableBooking[0].email}<br />
-            <strong>Phone:</strong> {tableBooking[0].phone}<br />
-            <strong>Guests:</strong> {tableBooking[0].guests}<br />
-          <strong>Time:</strong> {new Date(tableBooking[0].time).toLocaleString(undefined, {dateStyle: 'medium',timeStyle: 'short'})}<br />
+            <strong>Name:</strong> {tableBooking[0].name}
+            <br />
+            <strong>Email:</strong> {tableBooking[0].email}
+            <br />
+            <strong>Phone:</strong> {tableBooking[0].phone}
+            <br />
+            <strong>Guests:</strong> {tableBooking[0].guests}
+            <br />
+            <strong>Time:</strong>{" "}
+            {new Date(tableBooking[0].time).toLocaleString(undefined, {
+              dateStyle: "medium",
+              timeStyle: "short",
+            })}
+            <br />
             <strong>Status:</strong> {tableBooking[0].status}
           </p>
         </div>
       )}
 
       {/* Delivery Tab */}
-      {selectedTab === 'delivery' && (
+      {selectedTab === "delivery" && (
         <div className="mt-4">
           <h5>📦 Delivery Address</h5>
           <button
             className={`${styles.tabButton}`}
-            style={{ marginBottom: '1rem' }}
+            style={{ marginBottom: "1rem" }}
             onClick={handleGetCurrentLocation}
           >
             Use Current Location
@@ -154,7 +187,7 @@ const Checkout = () => {
           <div className={styles.formGroup}>
             <label>Pincode</label>
             <input
-              type="text"
+              type="number"
               value={pincode}
               onChange={(e) => setPincode(e.target.value)}
               placeholder="Pincode"
@@ -170,7 +203,7 @@ const Checkout = () => {
           disabled={isSubmitting}
           onClick={handlePlaceOrder}
         >
-          {isSubmitting ? 'Placing Order...' : '✅ Place Order'}
+          {isSubmitting ? "Placing Order..." : "✅ Place Order"}
         </button>
       )}
     </div>
